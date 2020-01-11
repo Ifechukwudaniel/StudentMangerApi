@@ -21,7 +21,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-mongoose.connect(config.db);
+mongoose.connect(config.db, {useNewUrlParser:true, useUnifiedTopology:true});
 
 const connection = mongoose.connection;
 
@@ -37,14 +37,20 @@ module.exports = {
 // Bootstrap routes
 require('./config/passport')(passport);
 require('./config/express')(app, passport);
-require('./config/routes')(app, passport);
+require("./app/Departments")
+require('./app/Levels')
 
 connection
-  .on('error', console.error.bind(console, 'connection error:'))
-  .once('open', listen);
+   .on('error', console.error.bind(console, 'connection error:'))
+  .once('open', ()=>{
+        if (app.get('env') === 'test') return;
+      app.listen(port);
+      console.log('Express app started on port ' + port)
+  });
 
-function listen () {
-  if (app.get('env') === 'test') return;
-  app.listen(port);
-  console.log('Express app started on port ' + port);
-}
+app.use(function (req, res, next) {
+    res.status(404).json({
+      success: false,
+    });
+});
+
