@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 
-const Departments = new mongoose.Schema({
-  name: {
+const Courses = new mongoose.Schema({
+  title: {
     required: true,
     type: String,
   },
@@ -15,8 +15,9 @@ const Departments = new mongoose.Schema({
        required:true
    },
    material:[{
-       
+    type: ObjectId,
+    ref:"Level"  
    }]
 });
 
-module.exports = mongoose.model('Department', Departments);
+module.exports = mongoose.model('Courses',Courses );
