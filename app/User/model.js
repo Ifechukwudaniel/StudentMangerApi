@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 
-const Users = new mongoose.Schema({
+const User = new mongoose.Schema({
   matricNumber: {
     required: true,
     type: String,
@@ -20,4 +20,4 @@ const Users = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Users', Users);
+module.exports = mongoose.model('User', User);

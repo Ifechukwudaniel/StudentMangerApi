@@ -1,11 +1,8 @@
 
-const test= (req, res)=>{
-     console.log(test)
-     return res.send({data:"hjdhw3dhwd"})
+
+const index =  function (req, res) {
+    return  res.send('SUCCESS')
 }
-
-
-
 module.exports={
-    test
- }
+    index
+};

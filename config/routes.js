@@ -1,6 +1,6 @@
-module.exports = function (app){
+module.exports = function (app, passport){
    // Home Route
-   app.use('/',require('../app/Home')(app));
+   app.use('/',require('../app/Home'));
 
    // //Courses Route
    // app.use('/courses', require('../app/Courses'));
