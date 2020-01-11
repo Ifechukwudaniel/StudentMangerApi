@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 
-const Levels = new mongoose.Schema({
+const Level= new mongoose.Schema({
   number: {
     required: true,
     type: String,
@@ -10,6 +10,10 @@ const Levels = new mongoose.Schema({
     type: ObjectId,
     ref:"Courses"
   }],
+  department:{
+    type:ObjectId,
+    ref:"Departments"
+  }
 });
 
-module.exports = mongoose.model('Levels', Levels);
+module.exports = mongoose.model('Level', Level);
