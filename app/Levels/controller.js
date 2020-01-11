@@ -39,31 +39,39 @@ const createLevel =(req, res, next)=>{
         })
        }
        else 
-        return res.send({error:`${number} level already exist in this department`})
+        return res.status(500).send({error:`${number} level already exist in this department`})
      })
 
    })
    .catch(value=>{
-    return  res.send({error: `${department} does not exist`})
+    return  res.status(500).send({error: `${department} does not exist`})
    })
 
 
 }
 
 const getAllLevel = (req, res, next)=>{
-   Department.find({})
+   Level.find({})
    .then(departments=>res.json(departments))
-   .catch(err=>next(err))
+   .catch(err=> res.status(500).send({error:`Please an error occurred`}) )
 }
 
-const deleteLevel = (req, res, next)=>{
-  const {
-    name
-  } =req.body
-  Department.deleteMany({name:name})
-  .then(()=>res.send({message:"deleted Sucessfully"}))
+const getLevelByDepartmentId = (req, res, next)=>{
+   const{
+    departmentId
+   } = req.params
+
+  Department.findById(departmentId)
+    .populate(" levels")
+    .then(data=>{
+     return res.send(data.levels)
+    })
+    .catch(err=> res.status(500).send({error:`${departmentId} is not a department id`}) )
 }
+
 
   module.exports = {
-   createLevel
+   createLevel,
+   getAllLevel,
+   getLevelByDepartmentId
   };
