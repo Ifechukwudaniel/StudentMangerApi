@@ -1,6 +1,7 @@
 const  Level = require('./model');
 const  Department = require('../Departments/model')
 const DepartmentController = require("../Departments/controller")
+const {missingParameterError } = require('../utils/error')
 
 const createLevel =(req, res, next)=>{
   const {
@@ -8,16 +9,15 @@ const createLevel =(req, res, next)=>{
    department
   } = req.body
   if(!department){
-    return  res.send({error: "You can not create a  level without a department"})
+    return  res.status(500).send(missingParameterError("department"))
   }
 
   if(!number){
-    return  res.send({error: "You can not create a  level without a  with it"})
+    return  res.status(500).send(missingParameterError("number"))
   }
 
-   DepartmentController.getDepartmentByName(department)
+   DepartmentController.getDepartmentById(department)
    .then((department)=>{
-      console.log(department)
      Level.find({number:number, department:department._id})
      .then((value)=>{
        if(value.length===0){

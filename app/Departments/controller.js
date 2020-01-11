@@ -4,11 +4,15 @@ const createDepartment =(req, res, next)=>{
   const {
    name
   } = req.body
+
+  if(!name)
+  return  res.status(500).send(missingParameterError("department"))
+  
     Department.find({name:name})
     .then((value)=>{
       if(value.length !==0){
          console.log(value)
-        return res.json({error:"This department already exist"})
+        return res.status(500).json({error:"This department already exist"})
       }
       else{
         const department =  new Department({
@@ -30,9 +34,9 @@ const getAllDepartment = (req, res, next)=>{
 }
 
 
-const getDepartmentByName = (department)=>{
+const getDepartmentById= (department)=>{
   return new Promise(( resolve , reject)=>{
-  Department.findOne({name:department})
+  Department.findOne({_id:department})
   .then((value)=>{
      if (value==null) {
       reject(value)
@@ -66,5 +70,5 @@ const deleteDepartment = (req, res, next)=>{
     createDepartment,
     getAllDepartment,
     deleteDepartment,
-    getDepartmentByName
+    getDepartmentById
   };
