@@ -8,7 +8,7 @@ const Departments = new mongoose.Schema({
   },
    levels: [{
     type: ObjectId,
-    ref:"levels"
+    ref:"Level"
   }],
 });
 
