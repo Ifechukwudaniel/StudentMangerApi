@@ -39,6 +39,7 @@ require('./config/passport')(passport);
 require('./config/express')(app, passport);
 require("./app/Departments")
 require('./app/Levels')
+require('./app/Courses')
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))
