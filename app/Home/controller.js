@@ -1,8 +1,11 @@
 
-/*!
- * Module dependencies.
- */
+const test= (req, res)=>{
+     console.log(test)
+     return res.send({data:"hjdhw3dhwd"})
+}
 
-module.exports.index = function (req, res) {
-  res.send('SUCCESS')
-};
+
+
+module.exports={
+    test
+ }
