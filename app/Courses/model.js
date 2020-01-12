@@ -16,7 +16,7 @@ const Courses = new mongoose.Schema({
    },
    material:[{
     type: ObjectId,
-    ref:"Level"  
+    ref:"Materials"  
    }]
 });
 
