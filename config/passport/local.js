@@ -11,12 +11,12 @@ var User = require('../../app/User/model');
  */
 
 module.exports = new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'matricNumber',
     passwordField: 'password'
   },
-  function (email, password, done) {
+  function (matricNumber, password, done) {
     var options = {
-      criteria: { email: email }
+      criteria: { matricNumber: matricNumber }
     };
     User.load(options, function (err, user) {
       if (err) return done(err);
