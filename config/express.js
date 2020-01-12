@@ -81,7 +81,7 @@ module.exports = function (app, passport) {
 
   // cookieParser should be above session
   app.use(cookieParser());
-  app.use(cookieSession({ secret: 'secret' }));
+  app.use(cookieSession({ secret: '3 33hbjk3kjb3ekb2ek23e3bebe1njk3kj3wjk33wkjfwjk3dw3f' }));
   app.use(session({
     secret: pkg.name,
     proxy: true,
