@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const {PastQuestions,studyMaterial} = require('../../constants/SchemaEnum')
 
 const Materials = new mongoose.Schema({
-  matricNumber: {
-    required: true,
-    type: String,
-  },
-   level: {
-    type: ObjectId,
-    ref:"levels"
-  },
-  department:{
+  course:{
       type:ObjectId,
-      ref:"department"
+      ref:""
   },
-  password:{
+  file:{
       type:String,
       required:true
+  },
+  name:{
+    type:String,
+    required:true
+  },
+  type:{
+    type: String,
+    enum: [studyMaterial, PastQuestions],
+    default:"P"
   }
 });
 
