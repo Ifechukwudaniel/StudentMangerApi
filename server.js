@@ -42,12 +42,12 @@ module.exports = {
 };
 
 // Bootstrap routes
-require('./config/passport')(passport);
+require('./config/passport/local',(passport));
 require('./config/express')(app, passport);
 require("./app/Departments")
 require('./app/Levels')
 require('./app/Courses')
-require('./app/User');
+require('./app/User',(passport));
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))

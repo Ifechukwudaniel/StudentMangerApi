@@ -10,4 +10,5 @@ module.exports = {
    FetchCourse:"/:level/course/",
    DeleteDepartment:"/department/",
    DeleteById:"/auth/:userId",
+   Login :"/auth/login"
 }
