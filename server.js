@@ -48,6 +48,7 @@ require("./app/Departments")
 require('./app/Levels')
 require('./app/Courses')
 require('./app/User',(passport));
+require("./app/Materials")
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))

@@ -5,7 +5,8 @@ const {PastQuestions,studyMaterial} = require('../../constants/SchemaEnum')
 const Materials = new mongoose.Schema({
   course:{
       type:ObjectId,
-      ref:""
+      ref:"Courses",
+      required:true
   },
   file:{
       type:String,
@@ -18,7 +19,11 @@ const Materials = new mongoose.Schema({
   type:{
     type: String,
     enum: [studyMaterial, PastQuestions],
-    default:"P"
+    required:true
+  },
+  fileType:{
+    type:String,
+    required:true
   }
 });
 

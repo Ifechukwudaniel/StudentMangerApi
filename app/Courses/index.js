@@ -2,9 +2,9 @@ var CoursesController = require('./controller');
 const {app} = require('../../server')
 const {
   CreateCourse,
-  FetchCourse
+  FetchCourseByLevel
 } = require("../../constants/routes")
 
 
-app.post(CreateCourse, CoursesController.createCourse)
-app.get(FetchCourse, CoursesController.getAllCourseByLevel)
+app.post(CreateCourse, CoursesController.createCourse);
+app.get(FetchCourseByLevel, CoursesController.getAllCourseByLevel)
