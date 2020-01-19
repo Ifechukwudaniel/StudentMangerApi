@@ -2,5 +2,6 @@
  * Expose
  */
 module.exports = {
-    db: process.env.db,
+    db: process.env.DB,
+    SECRET:process.env.SECRET
 };
