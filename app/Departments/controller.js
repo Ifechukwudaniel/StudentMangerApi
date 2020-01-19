@@ -29,6 +29,7 @@ const createDepartment =(req, res, next)=>{
 
 const getAllDepartment = (req, res, next)=>{
    Department.find({})
+   .select("-levels")
    .then(departments=>res.json(departments))
    .catch(err=>next(err))
 }

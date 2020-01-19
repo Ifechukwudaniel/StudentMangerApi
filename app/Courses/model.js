@@ -14,6 +14,14 @@ const Courses = new mongoose.Schema({
        type:String,
        required:true
    },
+   level:{
+    type: ObjectId,
+    ref:"Level" 
+   },
+   department:{
+    type: ObjectId,
+    ref:"Department" 
+   },
    material:[{
     type: ObjectId,
     ref:"Materials"  
