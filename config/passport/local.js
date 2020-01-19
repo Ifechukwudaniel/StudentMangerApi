@@ -13,6 +13,7 @@ const JWTStrategy   = passportJWT.Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../../app/User/model');
 var crypto = require('../../app/utils/crypto');
+const config = require('../env/development')
 
 /**
  * Expose
@@ -40,7 +41,7 @@ passport.use(new LocalStrategy({
 
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey   : 'secret_restaurant_app'
+  secretOrKey   : config.SECRET
 },
 function (jwtPayload, cb) {
   // find the user in db if needed
