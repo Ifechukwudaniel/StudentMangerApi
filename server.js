@@ -25,8 +25,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('./app/User/model');
 var crypto = require('./app/utils/crypto');
 const port = process.env.PORT || 3000;
+const cors = require('cors')
 
 const app = express();
+app.use(cors())
 
 mongoose.connect(config.db, {useNewUrlParser:true, useUnifiedTopology:true});
 
@@ -40,6 +42,7 @@ module.exports = {
   app,
   connection
 };
+
 
 // Bootstrap routes
 require('./config/passport/local',(passport));
@@ -58,9 +61,9 @@ connection
       console.log('Express app started on port ' + port)
   });
 
-// app.use(function (req, res, next) {
-//     res.status(404).json({
-//       success: false,
-//     });
-// });
+app.use(function (req, res, next) {
+    res.status(404).json({
+      success: false,
+    });
+});
 
