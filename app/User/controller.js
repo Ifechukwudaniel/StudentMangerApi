@@ -3,8 +3,9 @@ const crypto = require('../utils/crypto');
 const {logInApi} = require("../utils/login") 
 const jwt = require('jsonwebtoken');
 const {missingParameterError} = require("../utils/error")
+const config = require('../../config')
 
-const register = function (req, res, next) {
+const register = function (req, res, next, isLogin=false) {
   const {
     matricNumber,
     password,
@@ -30,8 +31,7 @@ const register = function (req, res, next) {
               name:value.name,
               password: hashedPassword,
               role: role ? 'admin' : 'user',
-            });
-            
+            })
             user
               .save()
               .then((user) => { 
@@ -43,6 +43,9 @@ const register = function (req, res, next) {
               .catch(e => {
                 return res.status(500).send({error:` An error occurred` })
               });
+       })
+       .catch(value=>{
+          console.log(value)
        })
       }})
 };
@@ -71,6 +74,7 @@ const getUserById = function (req, res, next) {
 const getUsers = function (req, res, next) {
     User
       .find({})
+      .select("-password")
       .exec()
       .then(user =>res.json(user))
       .catch(e => res.status(500).send({error:"An error occurred"}));
@@ -96,34 +100,64 @@ const deleteUserById = function (req, res, next) {
 // Login is a curried function which takes passport
 const login = function (passport) {
   return function (req, res, next) {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-      if (err || !user) {
-        return res.status(400).json({
-          message: 'User Id or Password is wrong',
-          user   : user
-        });
+        passport.authenticate('local', { session: false }, (err, user, info) => {
+          if (err || !user) {
+            return res.status(400).json({
+              error: 'User Id or Password is wrong',
+            });
+          }
+          req.login(user, { session: false }, (err) => {
+            if (err) {
+              next(err);
+            }
+            // Provide data since user is not a proper serialized object
+            const token = jwt.sign(user.toObject(), config.SECRET);
+            return res.json({
+              success: true,
+              token,
+            });
+          });
+        })(req, res);
       }
-      req.login(user, { session: false }, (err) => {
-        if (err) {
-          next(err);
-        }
-        // Provide data since user is not a proper serialized object
-        const token = jwt.sign(user.toObject(), 'secret_restaurant_app');
-          
-        return res.json({
-          success: true,
-          token,
-        });
-      });
-    })(req, res);
-  };
-  
 };
+
+const verifyToken = (req, res, next)=>{
+  const {
+    token
+  } = req.body
+  if(!token){
+    return res.status(500).send(missingParameterError("Missing Token"))
+  }
+  confirmToken(token).then((value)=>{
+     return res.send({token:token})
+  })
+  
+}
+
+function confirmToken(token) {
+  return new Promise((resolve, reject)=>{
+  const userData =  jwt.verify(token,config.SECRET)
+   User.findById(userData._id)
+  .then((user)=>{
+    if (user.matricNumber===userData.matricNumber && user.password=== userData.password) {
+        resolve(true)
+    }
+    else
+       reject(false)
+
+  })
+  .catch(()=>{
+    reject(false)
+  })
+})
+}
+
 
 module.exports = {
   register,
   getUsers,
   deleteUserById,
   login,
-  getUserById
+  getUserById,
+  verifyToken
 };

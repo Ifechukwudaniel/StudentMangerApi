@@ -2,8 +2,22 @@ var LevelController = require('./controller');
 const {app} = require('../../server')
 const {
     CreateLevel,
-    FetchLevelByDepartmentId
+    FetchLevelByDepartmentId,
+    FetchLevel
 } = require("../../constants/routes")
+const passport = require('passport')
 
-app.post(CreateLevel, LevelController.createLevel);
-app.get( FetchLevelByDepartmentId, LevelController.getLevelByDepartmentId)
+app.post(CreateLevel, 
+    passport.authenticate('jwt', {session:false}),
+    LevelController.createLevel
+);
+
+app.get( FetchLevelByDepartmentId, 
+    passport.authenticate('jwt', {session:false}),
+    LevelController.getLevelByDepartmentId
+);
+
+app.get( FetchLevel, 
+    passport.authenticate('jwt', {session:false}),
+    LevelController.getAllLevel
+);

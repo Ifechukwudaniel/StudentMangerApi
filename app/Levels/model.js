@@ -12,7 +12,7 @@ const Level= new mongoose.Schema({
   }],
   department:{
     type:ObjectId,
-    ref:"Departments"
+    ref:"Department"
   }
 });
 

@@ -5,9 +5,19 @@ const {
     FetchAllDepartment,
     DeleteDepartment
 } = require("../../constants/routes")
+const passport = require("passport")
 
-app.post(CreateDepartment, DepartmentController.createDepartment);
+app.post(CreateDepartment,
+    passport.authenticate('jwt', {session:false}),
+    DepartmentController.createDepartment
+);
 
-app.get(FetchAllDepartment, DepartmentController.getAllDepartment);
+app.get(FetchAllDepartment, 
+    passport.authenticate('jwt', {session:false}),
+    DepartmentController.getAllDepartment
+);
 
-app.delete(DeleteDepartment, DepartmentController.deleteDepartment)
+app.delete(DeleteDepartment,
+    passport.authenticate('jwt', {session:false}),
+     DepartmentController.deleteDepartment
+)
