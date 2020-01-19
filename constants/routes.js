@@ -8,9 +8,12 @@ module.exports = {
    FetchUserById:"/auth/:userId",
    FetchAllDepartment:"/department/",
    FetchLevelByDepartmentId :"/:departmentId/level/",
+   FetchLevel :"/levels/",
    FetchCourseByLevel:"/:level/course/",
    FetchMaterialsByCourseId:"/material/:materialId",
    DeleteDepartment:"/department/",
    DeleteById:"/auth/:userId",
-   Login :"/auth/login"
+   Login :"/auth/login",
+   VerifyToken:'/auth/token',
+   FetchAllCourse:'/courses/'
 }
