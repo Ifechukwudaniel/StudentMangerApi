@@ -33,7 +33,8 @@ const  createCourse= (req,res, next)=>{
                 title,
                 courseCode,
                 description,
-
+                department,
+                level
               })
               .save()
               .then((data)=>{
@@ -66,12 +67,20 @@ getAllCourseByLevel= (req, res, next)=>{
        Level.findOne({
          _id:level
        })
-       .populate(" courses")
+       .populate(" courses  ")
        .then((lev)=>{
                    return res.send(lev.courses)
        })
 }
+getAllCourses = (req, res, next )=>{
+    Course.find({})
+    .populate('department level')
+    .then(data=>{
+      return res.send(data)
+    })
+}
 module.exports = {
    createCourse,
-   getAllCourseByLevel
+   getAllCourseByLevel,
+   getAllCourses
 };

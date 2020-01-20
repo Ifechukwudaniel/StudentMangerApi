@@ -6,9 +6,12 @@ const {
     FetchLevel
 } = require("../../constants/routes")
 const passport = require('passport')
+const {roleAuthorization} = require('../utils/roleAuthorization')
+
 
 app.post(CreateLevel, 
     passport.authenticate('jwt', {session:false}),
+    roleAuthorization(['admin']),
     LevelController.createLevel
 );
 

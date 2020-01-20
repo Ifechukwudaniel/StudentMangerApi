@@ -44,12 +44,15 @@ passport.use(new JWTStrategy({
   secretOrKey   : config.SECRET
 },
 function (jwtPayload, cb) {
-  // find the user in db if needed
+  if(!jwtPayload){
+      return cb({error:"Not authorized"})
+  }
   User.findById(jwtPayload._id)
       .then(user => {
           return cb(null, user);
       })
       .catch(err => {
+          console.log(err)
           return cb(err);
       });
 }

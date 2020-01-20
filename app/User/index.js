@@ -10,6 +10,7 @@ const {
 } = require("../../constants/routes")
 const {app} = require("../../server")
 const passport = require("passport")
+const {roleAuthorization} = require('../utils/roleAuthorization')
 
   
 app.post(CreateUser,
@@ -19,6 +20,7 @@ app.post(CreateUser,
 
 app.delete(DeleteById,
   passport.authenticate('jwt', {session:false}),
+  roleAuthorization(['admin']),
   UserController.deleteUserById
 )
 
@@ -29,6 +31,7 @@ app.get(FetchUserById,
 
 app.get(FetchUserAllUser, 
   passport.authenticate('jwt', {session:false}),
+  roleAuthorization(['admin']),
   UserController.getUsers
 )
 

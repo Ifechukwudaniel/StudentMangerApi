@@ -6,9 +6,11 @@ const {
     DeleteDepartment
 } = require("../../constants/routes")
 const passport = require("passport")
+const {roleAuthorization} = require('../utils/roleAuthorization')
 
 app.post(CreateDepartment,
     passport.authenticate('jwt', {session:false}),
+    roleAuthorization(['admin']),
     DepartmentController.createDepartment
 );
 
@@ -19,5 +21,6 @@ app.get(FetchAllDepartment,
 
 app.delete(DeleteDepartment,
     passport.authenticate('jwt', {session:false}),
+    roleAuthorization(['admin']),
      DepartmentController.deleteDepartment
 )
