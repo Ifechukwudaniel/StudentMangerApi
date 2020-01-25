@@ -11,9 +11,12 @@ module.exports = {
    FetchLevel :"/levels/",
    FetchCourseByLevel:"/:level/course/",
    FetchMaterialsByCourseId:"/material/:materialId",
+   FetchAllBlogs:'/blog/',
    DeleteDepartment:"/department/",
    DeleteById:"/auth/:userId",
+   DeleteBlog:"/blog/:blogId",
    Login :"/auth/login",
    VerifyToken:'/auth/token',
-   FetchAllCourse:'/courses/'
+   FetchAllCourse:'/courses/',
+   CreateBlog:'/blog/',
 }

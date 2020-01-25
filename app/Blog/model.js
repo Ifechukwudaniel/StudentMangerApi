@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 
-const Courses = new mongoose.Schema({
-  title: {
+const Blogs= new mongoose.Schema({
+  image: {
     required: true,
     type: String,
-  },
-  image:{
-      type:String,
-      required:true
   },
   content:{
       type:String,
@@ -16,4 +12,4 @@ const Courses = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Courses',Courses );
+module.exports = mongoose.model('Blogs',Blogs );

@@ -62,7 +62,7 @@ const getLevelByDepartmentId = (req, res, next)=>{
    } = req.params
 
   Department.findById(departmentId)
-    .populate(" levels")
+    .populate({path:"levels", select:'number'})
     .then(data=>{
      return res.send(data.levels)
     })

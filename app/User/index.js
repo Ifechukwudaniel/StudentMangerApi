@@ -26,6 +26,7 @@ app.delete(DeleteById,
 
 app.get(FetchUserById, 
   passport.authenticate('jwt', {session:false}),
+  roleAuthorization(['admin']),
   UserController.getUserById
 )
 
