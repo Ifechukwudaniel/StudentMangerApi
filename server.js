@@ -53,6 +53,7 @@ require('./app/Courses')
 require('./app/User',(passport));
 require("./app/Materials")
 require('./app/Blog')
+require('./app/Comment')
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))

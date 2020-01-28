@@ -26,6 +26,8 @@ const  createBlog= (req,res, next)=>{
 
 getAllBlogs = (req, res, next )=>{
     Blog.find({})
+    .populate("comments")
+    .limit(10)
     .then(data=>{
       return res.send(data.reverse())
     })

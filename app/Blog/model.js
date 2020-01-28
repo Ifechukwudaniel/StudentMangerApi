@@ -9,6 +9,14 @@ const Blogs= new mongoose.Schema({
   content:{
       type:String,
       required:true
+  },
+  comments:[{
+    type:ObjectId,
+    ref:"Comments"
+  }],
+  timeStamp:{
+     type:Date,
+     default:Date.now()
   }
 });
 
