@@ -4,16 +4,22 @@ const {missingParameterError, missingImageError}  = require("../utils/error")
 const  createBlog= (req,res, next)=>{
    const {
      image, 
-     content
+     content,
+     title,
+     tag
    } = req.body
 
-  if(!content) return res.status(500).send(missingParameterError("department"))
+  if(!content) return res.status(500).send(missingParameterError("content"))
+  if(!title) return res.status(500).send(missingParameterError("title"))
+  if(!tag) return res.status(500).send(missingParameterError("tag"))
 
   if(!image) return res.status(500).send(missingImageError())
   
   const blog = new Blog({
       image,
-      content
+      content,
+      title,
+      tag
   })
   blog.save()
   .then(()=>{
@@ -26,7 +32,7 @@ const  createBlog= (req,res, next)=>{
 
 getAllBlogs = (req, res, next )=>{
     Blog.find({})
-    .populate("comments")
+    .populate({path:"comments",select:"time content user"})
     .limit(10)
     .then(data=>{
       return res.send(data.reverse())

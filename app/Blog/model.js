@@ -6,6 +6,10 @@ const Blogs= new mongoose.Schema({
     required: true,
     type: String,
   },
+  title:{
+    type:String,
+    required:true
+  },
   content:{
       type:String,
       required:true
@@ -17,6 +21,9 @@ const Blogs= new mongoose.Schema({
   timeStamp:{
      type:Date,
      default:Date.now()
+  },
+  tag:{
+    type:String,
   }
 });
 
