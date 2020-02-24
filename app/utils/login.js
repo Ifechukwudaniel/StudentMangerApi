@@ -28,6 +28,9 @@ function logInApi (matricNumber, password){
           resolve({name:name,matricNumber:matricNumber, password:password})
         })
       })
+      .catch( err=>{
+        reject( {error:"Please an error occurred "})
+      })
 
 })}
 
