@@ -18,6 +18,9 @@ const Comment= new mongoose.Schema({
   blog:{
     type:ObjectId,
     ref:"Blogs"
+  },
+  likes:{
+    type:Number
   }
 });
 
