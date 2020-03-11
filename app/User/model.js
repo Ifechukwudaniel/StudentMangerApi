@@ -30,6 +30,10 @@ const User = new mongoose.Schema({
     type: String,
     enum: [admin, user],
     default: user,
+  },
+  accessLevel:{
+    type:Number,
+    default:0
   }
 });
 
