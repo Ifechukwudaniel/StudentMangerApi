@@ -18,7 +18,7 @@ const register = function (req, res, next, isLogin=false) {
   if(!password) 
     return res.status(500).send(missingParameterError(" Missing password"))
   
-  User.findOne({matricNumber:matricNumber})
+  User.findOne({matricNumber:matricNumber.trim()})
   .then((value)=>{
      if(value)
       return res.status(500).send({error:` User with ${matricNumber} already exist` })
