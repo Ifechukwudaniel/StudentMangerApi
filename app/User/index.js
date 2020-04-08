@@ -14,7 +14,7 @@ const {roleAuthorization} = require('../utils/roleAuthorization')
 
   
 app.post(CreateUser,
-  passport.authenticate('jwt', {session:false}),
+  passport.authenticate('jwt', {session:false, failureMessage:"Plese"}),
   UserController.register
 );
 
