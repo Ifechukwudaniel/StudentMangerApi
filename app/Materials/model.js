@@ -12,16 +12,24 @@ const Materials = new mongoose.Schema({
       type:String,
       required:true
   },
-  name:{
+  fileType:{
     type:String,
     required:true
   },
-  type:{
-    type: String,
-    enum: [studyMaterial, PastQuestions],
+  lecturer:{
+    type:String,
+    required:true
+  }, 
+  pages:{
+    type:Number,
     required:true
   },
-  fileType:{
+  printedCopies:{
+    type:Number,
+    required:true,
+    default:0 
+  },
+  descriptionTitle:{
     type:String,
     required:true
   }
