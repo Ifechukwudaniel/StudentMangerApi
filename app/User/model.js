@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
-const {user, admin} = require('../../constants/SchemaEnum')
+const {user, admin, staff} = require('../../constants/SchemaEnum')
 
 const User = new mongoose.Schema({
   image: {
@@ -28,7 +28,7 @@ const User = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: [admin, user],
+    enum: [admin, user, staff],
     default: user,
   },
   accessLevel:{

@@ -67,8 +67,17 @@ const getMaterialByCourseId = (req, res, next)=>{
     .catch(err=> res.status(500).send({error:`${departmentId} is not a department id`}) )
 }
 
+const getMaterials= (req, res, next) =>{
+  Material.find()
+  .then(data=>{
+      return res.send(data)
+  })
+  .catch(err=> res.status(500).send({error:`Please an error occurred `}) )
+}
+
 
   module.exports = {
    createMaterial,
-   getMaterialByCourseId
+   getMaterialByCourseId,
+   getMaterials
   };

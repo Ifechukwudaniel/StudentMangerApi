@@ -12,6 +12,7 @@ module.exports = {
    FetchLevel :"/levels/",
    FetchCourseByLevel:"/:level/course/",
    FetchMaterialsByCourseId:"/material/:materialId",
+   FetchMaterials:"/material",
    FetchAllBlogs:'/blog/',
    FetchCommentByBlogId:'/comment/:blogId',
    DeleteDepartment:"/department/",
@@ -22,4 +23,5 @@ module.exports = {
    VerifyToken:'/auth/token',
    FetchAllCourse:'/courses/',
    CreateBlog:'/blog/',
+
 }

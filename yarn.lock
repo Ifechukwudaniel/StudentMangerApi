@@ -3660,6 +3660,11 @@ rc@^1.0.1:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-native-scroll-month-calender@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/react-native-scroll-month-calender/-/react-native-scroll-month-calender-0.0.11.tgz#1cf781916f845042ea8729782f42857b38522b3a"
+  integrity sha512-AmrSgL/wtrNOkqPS5Ya979TISQTfnLvsyTEm2E8zzupDWEhI1lMX9a6wxcANd+yc61Gi2YiRPR12ZQoP+UJpBA==
+
 read-all-stream@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/read-all-stream/-/read-all-stream-3.1.0.tgz#35c3e177f2078ef789ee4bfafa4373074eaef4fa"
