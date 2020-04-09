@@ -3,7 +3,8 @@ const {app} = require('../../server')
 const {
    CreateMaterial,
    FetchMaterialsByCourseId,
-   FetchMaterials
+   FetchMaterials,
+   FetchMaterialsByDepartmentAndLevel
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -23,4 +24,9 @@ app.get(FetchMaterialsByCourseId,
 app.get(FetchMaterials, 
    passport.authenticate('jwt', {session:false}),
    MaterialController.getMaterials
+)
+
+app.get(FetchMaterialsByDepartmentAndLevel, 
+   passport.authenticate('jwt', {session:false}),
+   MaterialController.getMaterialsByDepartmentAndLevel
 )

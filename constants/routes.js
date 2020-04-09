@@ -13,6 +13,7 @@ module.exports = {
    FetchCourseByLevel:"/:level/course/",
    FetchMaterialsByCourseId:"/material/:courseId",
    FetchMaterials:"/material",
+   FetchMaterialsByDepartmentAndLevel:"/material/:department/:level",
    FetchAllBlogs:'/blog/',
    FetchCommentByBlogId:'/comment/:blogId',
    DeleteDepartment:"/department/",

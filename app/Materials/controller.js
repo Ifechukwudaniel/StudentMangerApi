@@ -1,5 +1,8 @@
 const  Material = require('./model');
 const Course = require("../Courses/model")
+const Department = require("../Departments/model")
+const Level = require('../Levels/model') 
+
 const {missingParameterError } = require('../utils/error')
 
 const createMaterial =(req, res, next)=>{
@@ -87,9 +90,40 @@ const getMaterials= (req, res, next) =>{
   .catch(err=> res.status(500).send({error:`Please an error occurred `}) )
 }
 
+const getMaterialsByDepartmentAndLevel= (req, res, next) =>{
+  const {
+    department,
+    level
+  } = req.params
+  const material = []
+  Department.findById(department)
+  .then(department=>{
+     Level.findById(level)
+     .populate({path:"courses", select:"material -_id"})
+     .then((level)=>{
+        for (const course in level.courses) {
+             material.push(...level.courses[course].material)
+        } 
+        Material.find().where("_id").in(material)
+        .then(materials=>{
+          res.send(materials)
+        })
+     })
+     .catch(err=>{
+       console.log(err)
+       return res.status(404).send({error:`Please an error occurred`})
+     })
+
+  })
+  .catch(err=>{
+    console.log(err)
+     return res.status(404).send({error:`department  Not found`})
+  })
+}
 
   module.exports = {
    createMaterial,
    getMaterialByCourseId,
-   getMaterials
+   getMaterials,
+   getMaterialsByDepartmentAndLevel
   };
