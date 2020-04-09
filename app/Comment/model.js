@@ -15,12 +15,9 @@ const Comment= new mongoose.Schema({
     type:Date,
     default:Date.now()
   },
-  blog:{
-    type:ObjectId,
-    ref:"Blogs"
-  },
-  likes:{
-    type:Number
+  material:{
+    type: ObjectId,
+    ref:'Material'
   }
 });
 

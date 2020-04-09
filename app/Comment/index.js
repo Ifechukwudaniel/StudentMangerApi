@@ -13,15 +13,3 @@ app.post(CreateComment,
   roleAuthorization(['admin']),
   CommentController.createComment
 );
-
-
-// app.get(FetchCommentByBlogId,
-//   passport.authenticate('jwt', {session:false}),
-//   CommentController.getBlogComments
-// )
-
-// app.delete(DeleteBlog,
-//   passport.authenticate('jwt', {session:false}),
-//   roleAuthorization(['admin']),
-//   BlogController.deleteBlog
-// )
