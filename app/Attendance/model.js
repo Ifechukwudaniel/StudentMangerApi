@@ -17,6 +17,8 @@ const Courses = new mongoose.Schema({
    },
    attended:{
      type:Boolean,
+     required:true,
+     default:false
    }
 });
 
