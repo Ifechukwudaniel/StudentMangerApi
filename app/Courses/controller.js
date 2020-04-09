@@ -74,7 +74,8 @@ getAllCourseByLevel= (req, res, next)=>{
 }
 getAllCourses = (req, res, next )=>{
     Course.find({})
-    .populate('department level')
+    .populate('level', 'number -_id')
+    .populate('department', "name -_id")
     .then(data=>{
       return res.send(data)
     })

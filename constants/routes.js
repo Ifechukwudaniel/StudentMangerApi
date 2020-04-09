@@ -11,7 +11,7 @@ module.exports = {
    FetchLevelByDepartmentId :"/:departmentId/level/",
    FetchLevel :"/levels/",
    FetchCourseByLevel:"/:level/course/",
-   FetchMaterialsByCourseId:"/material/:materialId",
+   FetchMaterialsByCourseId:"/material/:courseId",
    FetchMaterials:"/material",
    FetchAllBlogs:'/blog/',
    FetchCommentByBlogId:'/comment/:blogId',

@@ -3,18 +3,18 @@ const Course = require("../Courses/model")
 const {missingParameterError } = require('../utils/error')
 
 const createMaterial =(req, res, next)=>{
-  const {  name,file,fileType,course, type} = req.body
-
+  const {  name,file,fileType,course, type, descriptionTitle, printedCopies,pages,lecturer} = req.body
+   console.log(req.body)
   if(!name){
-    return  res.status(500).send(missingParameterError("name"))
+    return  res.status(500).send(missingParameterError("Name"))
   }
 
   if(!file){
-    return  res.status(500).send(missingParameterError("file"))
+    return  res.status(500).send(missingParameterError("File"))
   }
 
   if(!fileType){
-    return  res.status(500).send(missingParameterError("file Type"))
+    return  res.status(500).send(missingParameterError("File Type"))
   }
 
   if(!course){
@@ -23,6 +23,15 @@ const createMaterial =(req, res, next)=>{
 
   if(!type){
     return  res.status(500).send(missingParameterError("Type"))
+  }
+  if(!pages){
+    return  res.status(500).send(missingParameterError("Pages"))
+  }
+  if(!descriptionTitle){
+    return  res.status(500).send(missingParameterError("Description Title"))
+  }
+  if(!lecturer){
+    return  res.status(500).send(missingParameterError("Lecturer"))
   }
 
   var courseId = course
@@ -33,7 +42,10 @@ const createMaterial =(req, res, next)=>{
       file,
       fileType,
       course,
-      type
+      type,
+      descriptionTitle,
+      pages,
+      lecturer
       })
       material
       .save()
@@ -45,7 +57,7 @@ const createMaterial =(req, res, next)=>{
          })
       })
       .catch((err)=>{
-        return  res.status(500).send({error:` Please an error occurred`})
+        return  res.status(500).send({error:` Please this partial course does not exist`})
       })
   })
   .catch((value)=>{
@@ -56,15 +68,15 @@ const createMaterial =(req, res, next)=>{
 
 const getMaterialByCourseId = (req, res, next)=>{
    const{
-    levelId
+    courseId
    } = req.params
 
-  Course.findById(departmentId)
-    .populate("materials ")
+  Course.findById(courseId)
+    .populate("material", "-course -__v")
     .then(data=>{
-     return res.send(data.ma)
+     return res.send(data.material)
     })
-    .catch(err=> res.status(500).send({error:`${departmentId} is not a department id`}) )
+    .catch(err=> res.status(500).send({error:`${coursesId} is not a department id`}) )
 }
 
 const getMaterials= (req, res, next) =>{
