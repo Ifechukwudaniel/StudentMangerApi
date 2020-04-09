@@ -34,6 +34,18 @@ const User = new mongoose.Schema({
   accessLevel:{
     type:Number,
     default:0
+  },
+  phoneNumber:{
+    type:Number,
+  },
+  parentNumber:{
+    type:Number,
+  },
+  guardianNumber:{
+    type:Number
+  },
+  nextOfKin:{
+    type:Number
   }
 });
 
