@@ -4,7 +4,7 @@ const {ObjectId} = mongoose.Types
 const Level= new mongoose.Schema({
   number: {
     required: true,
-    type: String,
+    type: Number,
   },
    courses: [{
     type: ObjectId,

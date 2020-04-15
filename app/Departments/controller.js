@@ -29,7 +29,9 @@ const createDepartment =(req, res, next)=>{
 
 const getAllDepartment = (req, res, next)=>{
    Department.find({})
-   .select("-levels")
+  //  .select("-levels")
+    .populate({path:'levels', select:'number'})
+    // .sort('descending')
    .then(departments=>res.json(departments))
    .catch(err=>next(err))
 }

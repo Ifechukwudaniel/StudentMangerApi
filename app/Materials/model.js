@@ -32,6 +32,10 @@ const Materials = new mongoose.Schema({
   descriptionTitle:{
     type:String,
     required:true
+  },
+  date:{
+    type:Date,
+    default:Date.now()
   }
 });
 
