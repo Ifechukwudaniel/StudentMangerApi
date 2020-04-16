@@ -105,7 +105,7 @@ const getMaterialsByDepartmentAndLevel= (req, res, next) =>{
              material.push(...level.courses[course].material)
         } 
         Material.find().where("_id").in(material)
-        .populate({path:'course', select:"courseCode description -_id" })
+        .populate({path:'course', select:"courseCode title -_id" })
         .then(materials=>{
           res.send(materials.reverse())
         })
