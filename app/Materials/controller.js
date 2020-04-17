@@ -2,6 +2,7 @@ const  Material = require('./model');
 const Course = require("../Courses/model")
 const Department = require("../Departments/model")
 const Level = require('../Levels/model') 
+const _ = require('lowdash')
 
 const {missingParameterError } = require('../utils/error')
 
@@ -122,9 +123,24 @@ const getMaterialsByDepartmentAndLevel= (req, res, next) =>{
   })
 }
 
+const searchMaterials=(req, res)=>{
+   const {searchQuery} = req.params
+    console.log(searchQuery)
+   if(!searchQuery){
+   return   res.status(404).send({error:"Please add a search query"})
+   }
+   Course.fuzzySearch(searchQuery,(err, data)=>{
+     if(err)
+       return  res.status(500).send({error:"Please an error occurred"})  
+      // return res.send(data)
+      _.map(data,)
+   })
+}
+
   module.exports = {
    createMaterial,
    getMaterialByCourseId,
    getMaterials,
-   getMaterialsByDepartmentAndLevel
+   getMaterialsByDepartmentAndLevel,
+   searchMaterials
   };

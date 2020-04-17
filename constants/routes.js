@@ -24,5 +24,5 @@ module.exports = {
    VerifyToken:'/auth/token',
    FetchAllCourse:'/courses/',
    CreateBlog:'/blog/',
-
+   searchMaterials:"/search/material/:searchQuery"
 }

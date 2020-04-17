@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+var mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 
 const Courses = new mongoose.Schema({
   title: {
@@ -8,7 +9,7 @@ const Courses = new mongoose.Schema({
   },
   courseCode:{
       type:String,
-      required:true
+      required:true,
   },
    description:{
        type:String,
@@ -27,5 +28,7 @@ const Courses = new mongoose.Schema({
     ref:"Materials"  
    }]
 });
+
+Courses.plugin(mongoose_fuzzy_searching, {fields: ['courseCode', 'title']});
 
 module.exports = mongoose.model('Courses',Courses );

@@ -2,6 +2,6 @@ module.exports= {
     admin:"admin",
     user:'user',
     staff:'staff',
-    studyMaterial:"Study Material",
+    StudyMaterial:"Study Material",
     PastQuestions:"Past Questions"
 }
