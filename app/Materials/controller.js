@@ -123,10 +123,15 @@ const searchMaterials=(req, res)=>{
    })
 }
 
+const filterMaterial  = (req, res) =>{
+   console.log(req)
+}
+
   module.exports = {
    createMaterial,
    getMaterialByCourseId,
    getMaterials,
    getMaterialsByDepartmentAndLevel,
-   searchMaterials
+   searchMaterials,
+   filterMaterial
   };

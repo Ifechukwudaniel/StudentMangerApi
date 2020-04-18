@@ -28,6 +28,7 @@ module.exports = {
    CreateBlog:'/blog/',
    CreateAttendance:'/attendance/',
    FetchAttendance:'/attendance/',
-   searchMaterials:"/search/material/:searchQuery"
+   searchMaterials:"/search/material/:searchQuery",
+   filterMaterial:"/filter/material/:query"
    
 }
