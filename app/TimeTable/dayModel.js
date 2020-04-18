@@ -14,7 +14,7 @@ const Day = new mongoose.Schema({
    weekDay:{
      type:Number,
      required:true,
-     enum:[1,2,3,4,5,6,7]
+     enum:[0,1,2,3,4,5,6]
    },
    active:{
      type:Boolean,
