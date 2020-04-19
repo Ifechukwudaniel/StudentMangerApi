@@ -3,5 +3,5 @@ module.exports= {
     user:'user',
     staff:'staff',
     StudyMaterial:"Study Material",
-    PastQuestions:"Past Questions"
+    PastQuestions:"Past Questions",
 }
