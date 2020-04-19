@@ -54,6 +54,7 @@ require('./app/User',(passport));
 require("./app/Materials")
 require('./app/Blog')
 require('./app/Comment')
+require('./app/TimeTable')
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))

@@ -5,6 +5,7 @@ module.exports = {
    CreateUser:"/auth/register",
    CreateMaterial:"/material/create",
    CreateComment:"/comment/",
+   CreateTimeTableByDepartment:"/timetable/:department",
    FetchUserAllUser:"/users",
    FetchUserById:"/auth/:userId",
    FetchAllDepartment:"/department/",
@@ -25,4 +26,5 @@ module.exports = {
    FetchAllCourse:'/courses/',
    CreateBlog:'/blog/',
    searchMaterials:"/search/material/:searchQuery"
+   
 }
