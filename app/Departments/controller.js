@@ -60,7 +60,7 @@ const deleteDepartment = (req, res, next)=>{
       })
       Department.deleteOne({_id:value.id})
       .then(()=>{
-        return res.send({message:"deleted Sucessfully"})
+        return res.send({message:"Deleted Sucessfully"})
       })
     }
     else{

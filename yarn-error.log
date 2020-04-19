@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add lowdash
+  /usr/local/bin/node /usr/local/bin/yarn add moment -cache
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,8 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+  Error: Client network socket disconnected before secure TLS connection was established
+      at TLSSocket.onConnectEnd (_tls_wrap.js:1095:19)
+      at Object.onceWrapper (events.js:286:20)
+      at TLSSocket.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1145:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -49,6 +53,7 @@ npm manifest:
       "fuse.js": "^5.1.0",
       "jade": "~1.11.0",
       "jsonwebtoken": "^8.5.1",
+      "lodash": "^4.17.15",
       "method-override": "~2.3.5",
       "mongoose": "^5.1.4",
       "mongoose-fuzzy-searching": "^1.1.9",
@@ -2896,7 +2901,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
     integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
   
-  lodash@^4.17.4, lodash@^4.3.0:
+  lodash@^4.17.15, lodash@^4.17.4, lodash@^4.3.0:
     version "4.17.15"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
     integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==

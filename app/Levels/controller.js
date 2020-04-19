@@ -8,13 +8,11 @@ const createLevel =(req, res, next)=>{
    number,
    department
   } = req.body
-  if(!department){
+  if(!department)
     return  res.status(500).send(missingParameterError("department"))
-  }
 
-  if(!number){
+  if(!number)
     return  res.status(500).send(missingParameterError("number"))
-  }
 
    DepartmentController.getDepartmentById(department)
    .then((department)=>{

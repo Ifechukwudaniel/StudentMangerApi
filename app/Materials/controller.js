@@ -2,41 +2,39 @@ const  Material = require('./model');
 const Course = require("../Courses/model")
 const Department = require("../Departments/model")
 const Level = require('../Levels/model') 
-const _ = require('lowdash')
+const _ = require('lodash')
 
 const {missingParameterError } = require('../utils/error')
 
 const createMaterial =(req, res, next)=>{
   const {  name,file,fileType,course, type, descriptionTitle, printedCopies,pages,lecturer} = req.body
    console.log(req.body)
-  if(!name){
+  if(!name)
     return  res.status(500).send(missingParameterError("Name"))
-  }
 
-  if(!file){
+  if(!file)
     return  res.status(500).send(missingParameterError("File"))
-  }
 
-  if(!fileType){
+  if(!fileType)
     return  res.status(500).send(missingParameterError("File Type"))
-  }
 
-  if(!course){
+  if(!course)
     return  res.status(500).send(missingParameterError("Course"))
-  }
 
-  if(!type){
+  if(!type)
     return  res.status(500).send(missingParameterError("Type"))
-  }
-  if(!pages){
+  
+
+  if(!pages)
     return  res.status(500).send(missingParameterError("Pages"))
-  }
-  if(!descriptionTitle){
+  
+
+  if(!descriptionTitle)
     return  res.status(500).send(missingParameterError("Description Title"))
-  }
-  if(!lecturer){
+  
+
+  if(!lecturer)
     return  res.status(500).send(missingParameterError("Lecturer"))
-  }
 
   var courseId = course
   Course.findById(courseId)
@@ -125,15 +123,20 @@ const getMaterialsByDepartmentAndLevel= (req, res, next) =>{
 
 const searchMaterials=(req, res)=>{
    const {searchQuery} = req.params
-    console.log(searchQuery)
    if(!searchQuery){
    return   res.status(404).send({error:"Please add a search query"})
    }
    Course.fuzzySearch(searchQuery,(err, data)=>{
      if(err)
        return  res.status(500).send({error:"Please an error occurred"})  
-      // return res.send(data)
-      _.map(data,)
+       let materials = _.flatten(_.map(data,(d => d.material)))
+       Material.find().where("_id").in(materials)
+       .populate({path:'course', select:"courseCode title -_id" })
+       .then(data=>{
+          res.send(data)
+       })
+       
+
    })
 }
 
