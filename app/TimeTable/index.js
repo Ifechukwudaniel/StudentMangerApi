@@ -1,12 +1,19 @@
 var TimeTableController = require('./controller');
 const {app} = require('../../server')
 const {
-   CreateTimeTableByDepartment
+   CreateTimeTableByLevel,
+   FetchTimeTableByLevel
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
 
-app.post( CreateTimeTableByDepartment, 
+app.post( CreateTimeTableByLevel, 
       passport.authenticate('jwt', {session:false}),
-      TimeTableController.addTimeTableByDepartment
+      TimeTableController.addTimeTableByLevel
+)
+
+
+app.get(FetchTimeTableByLevel, 
+      passport.authenticate('jwt', {session:false}),
+      TimeTableController.getTimeTableByLevel
 )

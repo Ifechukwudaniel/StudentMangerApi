@@ -9,34 +9,15 @@ const {missingParameterError } = require('../utils/error')
 const createMaterial =(req, res, next)=>{
   const {  name,file,fileType,course, type, descriptionTitle, printedCopies,pages,lecturer} = req.body
    console.log(req.body)
-  if(!name)
-    return  res.status(500).send(missingParameterError("Name"))
-
-  if(!file)
-    return  res.status(500).send(missingParameterError("File"))
-
-  if(!fileType)
-    return  res.status(500).send(missingParameterError("File Type"))
-
-  if(!course)
-    return  res.status(500).send(missingParameterError("Course"))
-
-  if(!type)
-    return  res.status(500).send(missingParameterError("Type"))
-  
-
-  if(!pages)
-    return  res.status(500).send(missingParameterError("Pages"))
-  
-
-  if(!descriptionTitle)
-    return  res.status(500).send(missingParameterError("Description Title"))
-  
-
-  if(!lecturer)
-    return  res.status(500).send(missingParameterError("Lecturer"))
-
-  var courseId = course
+  if(!name) return  res.status(500).send(missingParameterError("Name"))
+  if(!file) return  res.status(500).send(missingParameterError("File"))
+  if(!fileType) return  res.status(500).send(missingParameterError("File Type"))
+  if(!course) return  res.status(500).send(missingParameterError("Course"))
+  if(!type) return  res.status(500).send(missingParameterError("Type"))
+  if(!pages) return  res.status(500).send(missingParameterError("Pages"))
+  if(!descriptionTitle) return  res.status(500).send(missingParameterError("Description Title"))
+  if(!lecturer) return  res.status(500).send(missingParameterError("Lecturer"))
+  const  courseId = course
   Course.findById(courseId)
   .then((course)=>{
       const material = new Material({

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 
-const Courses = new mongoose.Schema({
+const Day = new mongoose.Schema({
   dayActions:[{
     type: ObjectId,
     ref:"DayAction" 
@@ -17,4 +17,4 @@ const Courses = new mongoose.Schema({
    }
 });
 
-module.exports = mongoose.model('Day',Courses );
+module.exports = mongoose.model('Day', Day );

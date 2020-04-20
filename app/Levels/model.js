@@ -13,6 +13,11 @@ const Level= new mongoose.Schema({
   department:{
     type:ObjectId,
     ref:"Department"
+  },
+  timeTable:{
+    type:ObjectId,
+    ref:"TimeTable",
+    default:null
   }
 });
 
