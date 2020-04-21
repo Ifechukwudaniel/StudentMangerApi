@@ -36,29 +36,29 @@ const addTimeTableByLevel= (req, res )=>{
                         })
                         .catch(err=>{
                           console.log(err)
-                          res.status(500).send({err:"please an error occurred"})
+                          res.status(500).send({error:"please an error occurred"})
                         })
                        })
                     })
                     .catch(err=>{
                       console.log(err)
-                      res.status(500).send({err:"please an error occurred"})
+                      res.status(500).send({error:"please an error occurred"})
                     })
                 })
                 .catch(err=>{
                   console.log(err)
-                   res.status(500).send({err:"please an error occurred"})
+                   res.status(500).send({error:"please an error occurred"})
                 })
               })
          })
          .catch(err=>{
           console.log(err)
-          res.status(500).send({err:"please an error occurred"})
+          res.status(500).send({error:"please an error occurred"})
          })
        })
        .catch( async err=>{
          console.log(err)
-          await   res.status(500).send({err:`please ${level} was not found`})
+          await   res.status(500).send({error:`please ${level} was not found`})
        })
       await res.send({message:"Successfully create timetable"})
   }))
@@ -78,7 +78,9 @@ const getTimeTableByLevel=(req, res)=>{
                 .sort({'days.dayActions.weekDay':'asc'})
                 .exec()
       .then(timeTable=>{
+        if(timeTable)
           return res.send(timeTable)
+        return res.status(500).send({error:' this department does not have a time table'})
       })
   })
 }
