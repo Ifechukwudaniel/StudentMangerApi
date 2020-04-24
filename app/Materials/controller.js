@@ -18,6 +18,7 @@ const createMaterial =(req, res, next)=>{
   if(!descriptionTitle) return  res.status(500).send(missingParameterError("Description Title"))
   if(!lecturer) return  res.status(500).send(missingParameterError("Lecturer"))
   const  courseId = course
+  console.log(courseId)
   Course.findById(courseId)
   .then((course)=>{
       const material = new Material({

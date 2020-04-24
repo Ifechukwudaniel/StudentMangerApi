@@ -1,9 +1,10 @@
 const TimeTable= require("./model")
-const Department = require('../Departments/model')
+const Course = require('../Courses/model')
 const Level = require('../Levels/model')
 const Day = require('./dayModel')
 const DayAction = require('./dayActionModel')
 const {missingParameterError}  = require("../utils/error")
+const _  = require('lodash')
 // const moment = require('moment')
  
 const addTimeTableByLevel= (req, res )=>{
@@ -73,13 +74,18 @@ const getTimeTableByLevel=(req, res)=>{
       .populate({path:'days',
                 populate:{
                   path:'dayActions',
-                  model:'DayAction'
-                } })
-                .sort({'days.dayActions.weekDay':'asc'})
+                  model:'DayAction',
+                  select:'startTime endTime course',
+                    populate:{
+                        path:"course",
+                        model:"Courses",
+                        select:'courseCode description  -_id',
+                    }
+                },})
                 .exec()
       .then(timeTable=>{
         if(timeTable)
-          return res.send(timeTable)
+          return res.send(_.sortBy(timeTable.days,['weekDay']))
         return res.status(500).send({error:' this department does not have a time table'})
       })
   })
