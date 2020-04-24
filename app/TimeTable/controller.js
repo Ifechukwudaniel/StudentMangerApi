@@ -75,7 +75,7 @@ const getTimeTableByLevel=(req, res)=>{
                 populate:{
                   path:'dayActions',
                   model:'DayAction',
-                  select:'startTime endTime course',
+                  select:'startTime endTime course location',
                     populate:{
                         path:"course",
                         model:"Courses",
