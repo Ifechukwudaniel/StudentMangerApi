@@ -14,6 +14,10 @@ const DayAction = new mongoose.Schema({
     type: ObjectId,
     ref:"Course" 
    },
+   location:{
+    type:String,
+    required:true
+   }
 });
 
 module.exports = mongoose.model('DayAction',DayAction );
