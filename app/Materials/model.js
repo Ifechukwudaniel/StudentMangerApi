@@ -20,8 +20,7 @@ const Materials = new mongoose.Schema({
   fileGroup:{
     type:String,
     enum:[studyMaterial,PastQuestions],
-    default:studyMaterial,
-    required:true,
+    default:studyMaterial
   },
   lecturer:{
     type:String,
@@ -42,8 +41,7 @@ const Materials = new mongoose.Schema({
   },
   date:{
     type:Date,
-    default:Date.now(),
-    required:true
+    default:Date.now()
   }
 });
 

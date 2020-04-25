@@ -41,6 +41,7 @@ const createMaterial =(req, res, next)=>{
          })
       })
       .catch((err)=>{
+        console.log(err)
         return  res.status(500).send({error:` Please this partial course does not exist`})
       })
   })
