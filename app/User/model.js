@@ -46,7 +46,7 @@ const User = new mongoose.Schema({
   },
   nextOfKin:{
     type:Number
-  }
+  },
 });
 
 module.exports = mongoose.model('User', User);
