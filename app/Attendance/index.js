@@ -1,12 +1,15 @@
-var CoursesController = require('./controller');
+var AttendanceController = require('./controller');
 const {app} = require('../../server')
 const {
-  CreateCourse,
-  FetchCourseByLevel,
-  FetchAllCourse
+  CreateAttendance,
+  FetchAttendance
+  
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
 
 
-
+app.post(CreateAttendance, 
+    passport.authenticate('jwt',{session:false}) ,
+    AttendanceController.addAttendance
+)
