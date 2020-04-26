@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
 const Blogs= new mongoose.Schema({
   image: {
@@ -25,6 +26,6 @@ const Blogs= new mongoose.Schema({
   tag:{
     type:String,
   }
-});
+},  configModel.options);
 
 module.exports = mongoose.model('Blogs',Blogs );

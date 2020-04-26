@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
-const Courses = new mongoose.Schema({
+const Attendance = new mongoose.Schema({
   date:{
       type:Date,
-      required:true,
       default:Date.now()
   },
    course:{
     type: ObjectId,
-    ref:"Course" 
+    ref:"Courses" 
    },
    user:{
     type: ObjectId,
@@ -17,9 +17,8 @@ const Courses = new mongoose.Schema({
    },
    attended:{
      type:Boolean,
-     required:true,
      default:false
    }
-});
+}, configModel.options);
 
-module.exports = mongoose.model('Courses',Courses );
+module.exports = mongoose.model('Attendance',Attendance );

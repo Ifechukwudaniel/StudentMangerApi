@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
 const Departments = new mongoose.Schema({
   name: {
@@ -10,6 +11,6 @@ const Departments = new mongoose.Schema({
     type: ObjectId,
     ref:"Level"
   }],
-});
+},  configModel.options);
 
 module.exports = mongoose.model('Department', Departments);

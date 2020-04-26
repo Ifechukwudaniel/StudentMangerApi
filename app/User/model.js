@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 const {user, admin, staff} = require('../../constants/SchemaEnum')
+const configModel = require('../utils/configModel')
 
 const User = new mongoose.Schema({
   image: {
@@ -47,6 +48,6 @@ const User = new mongoose.Schema({
   nextOfKin:{
     type:Number
   },
-});
+}, configModel.options);
 
 module.exports = mongoose.model('User', User);

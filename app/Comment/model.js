@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
 const Comment= new mongoose.Schema({
   user: {
@@ -19,6 +20,6 @@ const Comment= new mongoose.Schema({
     type: ObjectId,
     ref:'Material'
   }
-});
+}, configModel.options);
 
 module.exports = mongoose.model('Comments',Comment );

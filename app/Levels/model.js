@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
 const Level= new mongoose.Schema({
   number: {
@@ -19,6 +20,6 @@ const Level= new mongoose.Schema({
     ref:"TimeTable",
     default:null
   }
-});
+},  configModel.options);
 
 module.exports = mongoose.model('Level', Level);

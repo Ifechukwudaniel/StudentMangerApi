@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
+const configModel = require('../utils/configModel')
 
 const Day = new mongoose.Schema({
   dayActions:[{
@@ -19,6 +20,6 @@ const Day = new mongoose.Schema({
      type:Boolean,
      default:false
    }
-});
+},  configModel.options);
 
 module.exports = mongoose.model('Day', Day );

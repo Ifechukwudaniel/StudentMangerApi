@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 var mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+const configModel = require('../utils/configModel')
 
 const Courses = new mongoose.Schema({
   title: {
@@ -27,7 +28,7 @@ const Courses = new mongoose.Schema({
     type: ObjectId,
     ref:"Materials"  
    }]
-});
+}, configModel.options);
 
 Courses.plugin(mongoose_fuzzy_searching, {fields: ['courseCode', 'title']});
 

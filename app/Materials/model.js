@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 const {PastQuestions,studyMaterial} = require('../../constants/SchemaEnum')
 var mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+const configModel = require('../utils/configModel')
 
 const Materials = new mongoose.Schema({
   course:{
@@ -43,7 +44,7 @@ const Materials = new mongoose.Schema({
     type:Date,
     default:Date.now()
   }
-});
+},  configModel.options);
 
 
 Materials.plugin(mongoose_fuzzy_searching, {fields: ['lecturer']});
