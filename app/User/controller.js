@@ -77,7 +77,10 @@ const getUsers = function (req, res, next) {
       .select("-password")
       .exec()
       .then(user =>res.json(user))
-      .catch(e => res.status(500).send({error:"An error occurred"}));
+      .catch(e => {
+        res.status(500).send({error:"An error occurred"})
+        console.log(e)
+      });
 };
 
 /* Delete a user */

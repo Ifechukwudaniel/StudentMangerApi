@@ -70,7 +70,5 @@ const getAttendance= (req, res )=>{
  }
 
 module.exports = {
-   addAttendance,
-   getAttendance,
-   getUserAttendanceByCourse
+  
 };
