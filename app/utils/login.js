@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer')
 const uuid = require('crypto')
+const axios = require('axios')
+const xml2Json = require('xml2json') 
+
 // function logInApi (matricNumber, password){
 //     return new Promise((resolve, reject)=>{
 //         puppeteer
@@ -37,7 +40,19 @@ const uuid = require('crypto')
 
 const logInApi = ( matricNumber, password)=>{
     return new Promise((resolve, reject)=>{
-       resolve({name:"Username ", matricNumber, password})
+        axios.get(`https://www.biuportal.net/Services/CbtClientRequests.aspx?OPERATION=SIGNIN&USER_NAME=${matricNumber}&PASSWORD=${password}&VERSION=NEW-VERSION`)
+        .then(({data})=>{
+          let userData =JSON.parse(xml2Json.toJson(data))
+           if(userData.NewDataSet.Table1.RESPONSE=="SUCCESSFUL"){
+              resolve(userData.NewDataSet.Table1)
+           }
+           else{
+            reject({
+                RESPONSE:"FAILED",
+                MESSAGE:"CHECK YOUR USER AND PASSWORD"
+            })
+           }
+        })
     })
 }
 

@@ -27,7 +27,7 @@ passport.use(new LocalStrategy({
   function (matricNumber, password, done) {
 
     User.findOne({
-      matricNumber,
+      matricNumber: matricNumber.toUpperCase().trim(),
     }, function (err, user) {
       
       if (err) return done(err);

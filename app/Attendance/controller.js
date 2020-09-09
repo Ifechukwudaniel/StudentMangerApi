@@ -10,8 +10,8 @@ const addAttendance= (req, res )=>{
    if(!course)return res.status(500).send(missingParameterError("Course "))
    if(!timeStart)return res.status(500).send(missingParameterError("Course "))
    if(!timeEnd)return res.status(500).send(missingParameterError("Course "))
-
-   User.findOne({matricNumber})
+    
+   User.findOne({matricNumber:matricNumber.toUpperCase().trim()})
    .then(user=>{
       if(!user)  return res.status(500).send({error:`user with matric number ${matricNumber} not found`})
        Course.findById(course)

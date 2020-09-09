@@ -18,9 +18,6 @@ const {
 
 
 app.post(CreateUser,
-  passport.authenticate('jwt', {
-    session: false
-  }),
   UserController.register
 );
 

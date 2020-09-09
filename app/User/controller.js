@@ -4,6 +4,7 @@ const {logInApi} = require("../utils/login")
 const jwt = require('jsonwebtoken');
 const {missingParameterError} = require("../utils/error")
 const config = require('../../config')
+const firebase = require('../../firebase')
 
 const register = function (req, res, next, isLogin=false) {
   const {
@@ -18,36 +19,46 @@ const register = function (req, res, next, isLogin=false) {
   if(!password) 
     return res.status(500).send(missingParameterError(" Missing password"))
   
-  User.findOne({matricNumber:matricNumber.trim()})
+  User.findOne({matricNumber:matricNumber.toUpperCase().trim()})
   .then((value)=>{
-     if(value)
+     if(value){
       return res.status(500).send({error:` User with ${matricNumber} already exist` })
+     }
      else{
         const userData = logInApi(matricNumber, password)
         .then(value=>{
             const hashedPassword = crypto.encrypt(password);
             const user = new User({
-              matricNumber,
-              name:value.name,
+              matricNumber:value.MATRIC_NO,
+              name:value.FULL_NAME,
               password: hashedPassword,
               role: role ? 'admin' : 'user',
+            })
+            firebase.database().ref()
+            .child('users')
+            .push({
+             matricNumber:user.matricNumber,
+             name:user.name,
             })
             user
               .save()
               .then((user) => { 
-                 return res.json({
-                  user,
-                  success: true,
-                });
+                  return res.json({
+                    user,
+                    success: true,
+                  });
               })
               .catch(e => {
+                 console.log(e)
                 return res.status(500).send({error:` An error occurred` })
               });
        })
        .catch(value=>{
-          console.log(value)
+        return res.status(500).send(value)
        })
       }})
+
+
 };
 
 const getUserById = function (req, res, next) {
@@ -105,6 +116,7 @@ const login = function (passport) {
   return function (req, res, next) {
         passport.authenticate('local', { session: false }, (err, user, info) => {
           if (err || !user) {
+             console.log(user);
             return res.status(400).json({
               error: 'User Id or Password is wrong',
             });
