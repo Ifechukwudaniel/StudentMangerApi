@@ -1,86 +1,44 @@
-const axios = require('axios')
-const xml2Json = require('xml2json')
-const fs = require('fs')
+const axios = require('axios');
+const  qs = require('qs');
+var HTMLParser = require('node-html-parser');
+var data = qs.stringify({
+ '__VIEWSTATE': '/wEPDwUJNTMzNDU1NzA1D2QWAgIDDxYCHgxhdXRvY29tcGxldGUFA29mZmRkUqof2LAdE4XaTKVxV+vLr66d+Qk=',
+'__VIEWSTATEGENERATOR': 'C2EE9ABB',
+'__EVENTVALIDATION': '/wEdAARd9vtBLyjpHiBYSoOme+1hY3plgk0YBAefRz3MyBlTcHY2+Mc6SrnAqio3oCKbxYainihG6d/Xh3PZm3b5AoMQ9QuH9fLNL5w33RiP/YoinnH+MVI=',
+'txtUserName': 'scn/csc/1803',
+'txtPassword': 'password',
+'btnLogin': 'Login' 
+});
+var config = {
+  method: 'post',
+  url: 'https://www.biuportal.net/LogIn.aspx',
+  headers: { 
+    'authority': 'www.biuportal.net', 
+    'pragma': 'no-cache', 
+    'cache-control': 'no-cache', 
+    'upgrade-insecure-requests': '1', 
+    'origin': 'https://www.biuportal.net', 
+    'content-type': 'application/x-www-form-urlencoded', 
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36', 
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 
+    'sec-fetch-site': 'same-origin', 
+    'sec-fetch-mode': 'navigate', 
+    'sec-fetch-user': '?1', 
+    'sec-fetch-dest': 'document', 
+    'referer': 'https://www.biuportal.net/LogIn.aspx', 
+    'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8', 
+    'cookie': 'ASP.NET_SessionId=zllvytfxj4tcdfgqot31ei0a'
+  },
+  data : data
+};
 
-
-findCourses = async (i) => {
-   const data = await axios.get(`https://www.biuportal.net/Services/CbtClientRequests.aspx?OPERATION=LOADMCQQUESTIONS&CODE=83ea7147-07af-11ea-af0c-00155d65d005&COURSESN=${i}`,  {
-     timeout: 30000
-   })
-   .then(({data})=>{
-         
-      //       var d =  xml2Json.toJson(data)
-      //       let x = {NewDataSet:{Table1:{RESPONSE:"Inactive Examination"}}}
-      
-      //       // console.log(data)
-            
-      //        if(JSON.parse(d).NewDataSet.Table1.RESPONSE=== x.NewDataSet.Table1.RESPONSE){
-      //            console.log('f')
-      //        }
-      //        else{
-      //          fs.appendFile(`code.txt`,`${i} \n`, ()=>{
-                  
-      //           })  
-      //        }
-      
-      //     })
-      //     .catch(err=>{
-      //         console.log(err.message)
-      //        console.log(i,'1')
-      //     })
-  }
-
-
-//   async function findCourse (i){
-//    await axios.get(`https://www.biuportal.net/Services/CbtClientRequests.aspx?OPERATION=LOADMCQQUESTIONS&CODE=83ea7147-07af-11ea-af0c-00155d65d005&COURSESN=${i}`)
-//    .then(({data})=>{
-         
-//       var d =  xml2Json.toJson(data)
-//       let x = {NewDataSet:{Table1:{RESPONSE:"Inactive Examination"}}}
-
-//       // console.log(data)
-      
-//        if(JSON.parse(d).NewDataSet.Table1.RESPONSE=== x.NewDataSet.Table1.RESPONSE){
-//            console.log('f')
-//        }
-//        else{
-//          fs.appendFile(`code.txt`,`${i} \n`, ()=>{
-            
-//           })  
-//        }
-
-//     })
-//     .catch(err=>{
-//         console.log(err.message)
-//        console.log(i,'1')
-//     })
-//     setTimeout(()=>{
-
-//     }, 1000)
-//  }
- 
-
-// for (let index = 0; index < 7000; index++) {
-//     findCourse(index)
-//     .catch(err=>{
-//        console.log(err)
-//     })
-// }
-
-
-// const array = [{ id: 'asdf'}, { id: 'foo' }, { id: 'bar' }]; 
-// let users = [];
-// let promises = [];
-// for (i = 0; i < 7000; i++) {
-//   promises.push(
-//    axios.get(`https://www.biuportal.net/Services/CbtClientRequests.aspx?OPERATION=COURSEDETAILS&COURSESN=${i}`) 
-//     .then(response => {
-//       users.push(response);
-//     })
-//     .catch(err=>{
-//        console.log('err',i)
-//     })
-//   )
-// }
-
-// Promise.all(promises).then(() => console.log(users));
+axios(config)
+.then(function (response) {
+  const root = HTMLParser.parse(response.data);
+  // console.log(root)
+   console.log(root.querySelector("#lblErrorMessage").innerHTML)
+  
+})
+.catch(function (error) {
+  console.log(error);
+});
