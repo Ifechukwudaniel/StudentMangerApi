@@ -23,10 +23,6 @@ const Materials = new mongoose.Schema({
     enum:[studyMaterial,PastQuestions],
     default:studyMaterial
   },
-  lecturer:{
-    type:String,
-    required:true
-  }, 
   pages:{
     type:Number,
     required:true
@@ -46,7 +42,5 @@ const Materials = new mongoose.Schema({
   }
 },  configModel.options);
 
-
-Materials.plugin(mongoose_fuzzy_searching, {fields: ['lecturer']});
 
 module.exports = mongoose.model('Materials', Materials);

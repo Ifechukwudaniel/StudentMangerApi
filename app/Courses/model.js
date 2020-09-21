@@ -24,12 +24,16 @@ const Courses = new mongoose.Schema({
     type: ObjectId,
     ref:"Department" 
    },
+   lecturer:{
+    type:String,
+    required:true
+  }, 
    material:[{
     type: ObjectId,
     ref:"Materials"  
    }]
 }, configModel.options);
 
-Courses.plugin(mongoose_fuzzy_searching, {fields: ['courseCode', 'title']});
+Courses.plugin(mongoose_fuzzy_searching, {fields: ['courseCode', 'title','lecturer']});
 
 module.exports = mongoose.model('Courses',Courses );
