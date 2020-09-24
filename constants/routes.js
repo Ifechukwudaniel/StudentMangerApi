@@ -2,6 +2,7 @@ module.exports = {
    CreateDepartment:"/department/create",
    CreateLevel:"/level/create",
    CreateCourse:"/course/create",
+   SearchCourse:"/search/course/:searchQuery",
    CreateUser:"/auth/register",
    CreateMaterial:"/material/create",
    CreateComment:"/comment/",
@@ -30,6 +31,9 @@ module.exports = {
    FetchAttendance:'/attendance/',
    FetchAttendanceByCourse:'/attendance/:course',
    searchMaterials:"/search/material/:searchQuery",
-   filterMaterial:"/filter/material/:query"
-   
+   filterMaterial:"/filter/material/:query",
+   LikeBlogPost:'/blog/like/:blog',
+   DisLikeBlogPost:'/blog/dislike/:blog',
+   WeaklyActivity:'/activity/week/:level',
+   DayActivity:'/activity/day/:level'
 }
