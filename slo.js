@@ -5,8 +5,8 @@ var data = qs.stringify({
  '__VIEWSTATE': '/wEPDwUJNTMzNDU1NzA1D2QWAgIDDxYCHgxhdXRvY29tcGxldGUFA29mZmRkUqof2LAdE4XaTKVxV+vLr66d+Qk=',
 '__VIEWSTATEGENERATOR': 'C2EE9ABB',
 '__EVENTVALIDATION': '/wEdAARd9vtBLyjpHiBYSoOme+1hY3plgk0YBAefRz3MyBlTcHY2+Mc6SrnAqio3oCKbxYainihG6d/Xh3PZm3b5AoMQ9QuH9fLNL5w33RiP/YoinnH+MVI=',
-'txtUserName': 'scn/csc/1803',
-'txtPassword': 'password',
+'txtUserName': 'bas/csc/170387',
+'txtPassword': 'password1',
 'btnLogin': 'Login' 
 });
 var config = {

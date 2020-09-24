@@ -3,7 +3,9 @@ const {app} = require('../../server')
 const {
   CreateCourse,
   FetchCourseByLevel,
-  FetchAllCourse
+  FetchAllCourse,
+  searchMaterials,
+  SearchCourse,
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -25,4 +27,11 @@ app.get(FetchAllCourse,
   passport.authenticate('jwt', {session:false}),
   roleAuthorization(['admin','user']),
    CoursesController.getAllCourses
+)
+
+
+app.get(SearchCourse,
+  passport.authenticate('jwt', {session:false}),
+  roleAuthorization(['admin','user']),
+   CoursesController.searchCourse
 )
