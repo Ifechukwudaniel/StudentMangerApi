@@ -71,6 +71,7 @@ getAllCourseByLevel= (req, res, next)=>{
        .then((lev)=>{
                    return res.send(lev.courses)
        })
+  
 }
 getAllCourses = (req, res, next )=>{
     Course.find({})
@@ -80,8 +81,25 @@ getAllCourses = (req, res, next )=>{
       return res.send(data)
     })
 }
+
+const searchCourse=(req, res)=>{
+  const {searchQuery} = req.params
+  if(!searchQuery){
+     return   res.status(404).send({error:"Please add a Text"})
+  }
+
+  Course.fuzzySearch(searchQuery,(err, data)=>{
+    if(err){
+      return  res.status(500).send({error:"Please an error occurred"})  
+    }
+     return res.send(data) 
+  })
+}
+
+
 module.exports = {
    createCourse,
    getAllCourseByLevel,
-   getAllCourses
+   getAllCourses,
+   searchCourse
 };
