@@ -3,10 +3,12 @@ const {app} = require('../../server')
 const {
     CreateBlog,
     FetchAllBlogs,
-    DeleteBlog
+    DeleteBlog,
+    LikeBlogPost,
+    DisLikeBlogPost
 } = require("../../constants/routes")
 const passport = require('passport')
-const {roleAuthorization} = require('../utils/roleAuthorization')
+const {roleAuthorization} = require('../utils/roleAuthorization');
 
 
 app.post(CreateBlog, 
@@ -16,6 +18,7 @@ app.post(CreateBlog,
 );
 
 app.get(FetchAllBlogs,
+  passport.authenticate('jwt', {session:false}),
   BlogController.getAllBlogs
 )
 
@@ -23,4 +26,14 @@ app.delete(DeleteBlog,
   passport.authenticate('jwt', {session:false}),
   roleAuthorization(['admin']),
   BlogController.deleteBlog
-  )
+)
+
+app.get(LikeBlogPost,
+  passport.authenticate('jwt', {session:false}),
+  BlogController.likeBlogPost
+)
+
+app.get(DisLikeBlogPost,
+  passport.authenticate('jwt', {session:false}),
+  BlogController.dislikeBlogPost
+)
