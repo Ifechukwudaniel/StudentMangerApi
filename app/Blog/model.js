@@ -25,7 +25,15 @@ const Blogs= new mongoose.Schema({
   },
   tag:{
     type:String,
-  }
+  },
+  likedBy:[{
+    type:ObjectId,
+    ref:"Users"
+  }],
+  disLikedBy:[{
+    type:ObjectId,
+    ref:"Users"
+  }]
 },  configModel.options);
 
 module.exports = mongoose.model('Blogs',Blogs );
