@@ -2,23 +2,11 @@ const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types
 const configModel = require('../utils/configModel')
 
-const Attendance = new mongoose.Schema({
+const PassiveActivity = new mongoose.Schema({
   date:{
       type:Date,
       default:Date.now()
   },
-   course:{
-    type: ObjectId,
-    ref:"Courses" 
-   },
-   user:{
-    type: ObjectId,
-    ref:"User" 
-   },
-   attended:{
-     type:Boolean,
-     default:false
-   },
    timeStart:{
      type:String,
      required:true
@@ -29,4 +17,4 @@ const Attendance = new mongoose.Schema({
    }
 }, configModel.options);
 
-module.exports = mongoose.model('Attendance',Attendance );
+module.exports = mongoose.model('PassiveActivity',PassiveActivity );
