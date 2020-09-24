@@ -4,14 +4,14 @@
   let [hours, minutes] = time.split(':');
 
   if (hours === '12') {
-    hours = '00';
+    hours = 0;
   }
 
-  if (modifier === 'PM' || "pm") {
+  if (modifier === 'PM') {
     hours = parseInt(hours, 10) + 12;
   }
 
-  return hours
+  return parseInt(hours)
 }
 
 

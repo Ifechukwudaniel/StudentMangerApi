@@ -17,14 +17,12 @@ const getThisWeekActivityByLevel=(req, res, next)=>{
      let wen=  _.filter(data, {weekDay:3})
      let thu=  _.filter(data, {weekDay:4})
      let fri=  _.filter(data, {weekDay:5})
-     let x = mon.sort((a,b)=>{
-          let aTime = convertTime12to24(a.startTime)
-          let  bTime = convertTime12to24(b.startTime)
-           if (aTime > bTime) return a
-           if (bTime> aTime) return b;
-      })
-  
-    console.log(x)
+      mon.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
+      tue.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
+      wen.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
+      thu.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
+      fri.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
+
       return res.send([{ dayOfWeek:'monday',activities:mon}, {dayOfWeek:'tuesday',activities:tue}, {dayOfWeek:'wednesday',activity:wen}, {dayOfWeek:"thursday",activities:thu}, {dayOfWeek:'friday',activities:fri}])
    })
    .catch((err)=>{
@@ -39,6 +37,11 @@ const getThisWeekActivityByLevel=(req, res, next)=>{
    .lean().exec()
    .then((data)=>{
      let today=  _.filter(data, {weekDay:moment().day()+1})
+    
+       today.sort((a,b)=>{
+          return convertTime12to24(a.startTime) - convertTime12to24(b.startTime)
+      })
+      // console.log(x)
       return res.send(today)
    })
    .catch(()=>{
