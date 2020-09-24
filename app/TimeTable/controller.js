@@ -29,20 +29,20 @@ const addTimeTableByLevel= (req, res )=>{
                     await  TimeTable.findByIdAndUpdate(timeTable._id, { $push:{days:currentDay._id} })
                     .then(
                       
-                    //   async ()=>{
-                    //    await day.courses.map( async (course) =>{
-                    //       await  DayAction.create({...course})
-                    //     .then( async dayAction=>{
-                    //         await Day.findByIdAndUpdate(currentDay._id, {
-                    //             $push:{dayActions:dayAction._id}
-                    //         })
-                    //     })
-                    //     .catch(err=>{
-                    //       console.log(err)
-                    //       res.status(500).send({error:"please an error occurred"})
-                    //     })
-                    //    })
-                    // }
+                      async ()=>{
+                       await day.courses.map( async (course) =>{
+                          await  DayAction.create({...course})
+                        .then( async dayAction=>{
+                            await Day.findByIdAndUpdate(currentDay._id, {
+                                $push:{dayActions:dayAction._id}
+                            })
+                        })
+                        .catch(err=>{
+                          console.log(err)
+                          res.status(500).send({error:"please an error occurred"})
+                        })
+                       })
+                    }
                     
                     )
                     .catch(err=>{
