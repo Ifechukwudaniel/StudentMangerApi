@@ -56,6 +56,7 @@ require('./app/Blog')
 require('./app/Comment')
 require('./app/TimeTable')
 require('./app/Attendance')
+require('./app/Activity')
 
 connection
    .on('error', console.error.bind(console, 'connection error:'))
