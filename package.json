@@ -38,6 +38,7 @@
     "mongoose-fuzzy-searching": "^1.1.9",
     "mongoose-user": "0.0.1",
     "morgan": "~1.8.1",
+    "node-gcm": "^1.0.3",
     "node-html-parser": "^1.2.20",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
