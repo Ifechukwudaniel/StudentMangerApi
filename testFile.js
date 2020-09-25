@@ -29,21 +29,15 @@
  
 
 
-let convertTime12to24 = (time12h) => {
+const createLevelFromNumber =(x)=>{
+   let start= 100  
+   let array = []
+   for (let index = 1; index <=x; index++) {
+     array.push(index*start)
+   }
 
-  const [fullMatch, time, modifier] = '08:00 PM'.match(/(\d?\d:\d\d)\s*(\w{2})/i);
-
-  let [hours, minutes] = time.split(':');
-
-  if (hours === '12') {
-    hours = '00';
-  }
-
-  if (modifier === 'PM' || "pm") {
-    hours = parseInt(hours, 10) + 12;
-  }
-
-  return hours;
+   return array
 }
 
-convertTime12to24("08:00 PM")
+
+console.log(createLevelFromNumber(4))
