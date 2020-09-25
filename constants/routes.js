@@ -1,5 +1,6 @@
 module.exports = {
    CreateDepartment:"/department/create",
+   CreateDepartmentAndLevels:"/department/levels/create",
    CreateLevel:"/level/create",
    CreateCourse:"/course/create",
    SearchCourse:"/search/course/:searchQuery",

@@ -3,7 +3,8 @@ const {app} = require('../../server')
 const {
     CreateDepartment,
     FetchAllDepartment,
-    DeleteDepartment
+    DeleteDepartment,
+    CreateDepartmentAndLevels
 } = require("../../constants/routes")
 const passport = require("passport")
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -13,6 +14,13 @@ app.post(CreateDepartment,
     roleAuthorization(['admin']),
     DepartmentController.createDepartment
 );
+
+app.post(CreateDepartmentAndLevels,
+    passport.authenticate('jwt', {session:false}),
+    roleAuthorization(['admin']),
+    DepartmentController.createDepartmentAndLevels
+);
+
 
 app.get(FetchAllDepartment, 
     passport.authenticate('jwt', {session:false}),
