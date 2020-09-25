@@ -36,7 +36,7 @@ const getThisWeekActivityByLevel=(req, res, next)=>{
    .populate({path:"course", select:'courseCode'})
    .lean().exec()
    .then((data)=>{
-     let today=  _.filter(data, {weekDay:moment().day()+1})
+     let today=  _.filter(data, {weekDay:moment().day()})
     
        today.sort((a,b)=>{
           return convertTime12to24(a.startTime) - convertTime12to24(b.startTime)
