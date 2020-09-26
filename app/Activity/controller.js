@@ -23,7 +23,7 @@ const getThisWeekActivityByLevel=(req, res, next)=>{
       thu.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
       fri.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))
 
-      return res.send([{ dayOfWeek:'monday',activities:mon}, {dayOfWeek:'tuesday',activities:tue}, {dayOfWeek:'wednesday',activity:wen}, {dayOfWeek:"thursday",activities:thu}, {dayOfWeek:'friday',activities:fri}])
+      return res.send([{ dayOfWeek:'monday',activities:mon}, {dayOfWeek:'tuesday',activities:tue}, {dayOfWeek:'wednesday',activities:wen}, {dayOfWeek:"thursday",activities:thu}, {dayOfWeek:'friday',activities:fri}])
    })
    .catch((err)=>{
     console.log(err)
