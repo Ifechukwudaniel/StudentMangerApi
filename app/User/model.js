@@ -36,18 +36,6 @@ const User = new mongoose.Schema({
     type:Number,
     default:0
   },
-  phoneNumber:{
-    type:Number,
-  },
-  parentNumber:{
-    type:Number,
-  },
-  guardianNumber:{
-    type:Number
-  },
-  nextOfKin:{
-    type:Number
-  },
 }, configModel.options);
 
 module.exports = mongoose.model('User', User);
