@@ -9,7 +9,8 @@ const  createCourse= (req,res, next)=>{
      level,
      title,
      description,
-     courseCode
+     courseCode,
+     lecturer
    } = req.body
 
   if(!department) return res.status(500).send(missingParameterError("department"))
@@ -19,6 +20,8 @@ const  createCourse= (req,res, next)=>{
   if(!title) return res.status(500).send(missingParameterError("title"))
 
   if(!description) return res.status(500).send(missingParameterError("description"))
+
+  if(!lecturer) return res.status(500).send(missingParameterError("lecturer"))
 
    Department.findOne({_id:department})
    .then((dep)=>{
@@ -34,7 +37,8 @@ const  createCourse= (req,res, next)=>{
                 courseCode,
                 description,
                 department,
-                level
+                level,
+                lecturer
               })
               .save()
               .then((data)=>{
@@ -45,6 +49,12 @@ const  createCourse= (req,res, next)=>{
                   .then(()=>{
                      return res.send({message:`You just added ${courseCode}  to your ${lev.number} level ${dep.name}`})
                   })
+                  .catch((err)=>{
+                    return res.status(500).send({error:err.message})
+                  })
+              })
+              .catch((err)=>{
+                return res.status(500).send({error:err.message})
               })
 
             }
@@ -82,6 +92,18 @@ getAllCourses = (req, res, next )=>{
     })
 }
 
+getAllCoursesWebView = (req, res, next )=>{
+  Course.find({})
+  .populate('level', 'number -_id')
+  .populate('department', "name -_id")
+  .then(data=>{
+    return res.send(data.map((data)=>{
+       return {id:data.id,courseCode:data.courseCode,totalMaterial:data.material.length,level:data.level.number,department:data.department.name}
+    }))
+  })
+}
+
+
 const searchCourse=(req, res)=>{
   const {searchQuery} = req.params
   if(!searchQuery){
@@ -101,5 +123,6 @@ module.exports = {
    createCourse,
    getAllCourseByLevel,
    getAllCourses,
-   searchCourse
+   searchCourse,
+   getAllCoursesWebView
 };
