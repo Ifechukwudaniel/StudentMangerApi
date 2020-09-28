@@ -17,11 +17,11 @@ const User = new mongoose.Schema({
   },
    level: {
     type: ObjectId,
-    ref:"levels"
+    ref:"Level"
   },
   department:{
       type:ObjectId,
-      ref:"department"
+      ref:"Department"
   },
   password:{
       type:String,
