@@ -24,7 +24,7 @@ const createDepartment =(req, res, next)=>{
         .save()
         .then(department=>res.json(department))
         .catch(err=>  {
-          return  res.status(500).json({message:"PLease an error occurred"})
+          return  res.status(500).json({message:"Please an error occurred"})
         })
       }
       
@@ -36,7 +36,22 @@ const getAllDepartment = (req, res, next)=>{
     .populate({path:'levels', select:'number'})
    .then(departments=>res.json(departments))
    .catch(err=>{
-      return  res.status(500).json({message:"PLease an error occurred"})
+      return  res.status(500).json({message:"Please an error occurred"})
+   })
+}
+
+const getAllDepartmentWebView = (req, res, next)=>{
+   Department.find({})
+   .populate({path:'levels', select:'number'})
+   .lean().exec()
+   .then(departments=>{
+     return res.json(departments.map((data)=>{
+       return { id:data._id, name:data.name,totalLevels:data.levels.length}
+     }))
+
+   })
+   .catch(err=>{
+      return  res.status(500).json({message:"Please an error occurred"})
    })
 }
 
@@ -65,7 +80,7 @@ const deleteDepartment = (req, res, next)=>{
       })
       Department.deleteOne({_id:value.id})
       .then(()=>{
-        return res.send({message:"Deleted Sucessfully"})
+        return res.send({message:"Deleted Successfully"})
       })
     }
     else{
@@ -124,5 +139,6 @@ if(parseInt(numberOfLevels)> 8) return res.send(500).send({message:'The Number o
     getAllDepartment,
     deleteDepartment,
     getDepartmentById,
+    getAllDepartmentWebView,
     createDepartmentAndLevels
   };

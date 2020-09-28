@@ -4,7 +4,8 @@ const {
     CreateDepartment,
     FetchAllDepartment,
     DeleteDepartment,
-    CreateDepartmentAndLevels
+    CreateDepartmentAndLevels,
+    FetchDepartmentWebView
 } = require("../../constants/routes")
 const passport = require("passport")
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -25,6 +26,11 @@ app.post(CreateDepartmentAndLevels,
 app.get(FetchAllDepartment, 
     passport.authenticate('jwt', {session:false}),
     DepartmentController.getAllDepartment
+);
+
+app.get(FetchDepartmentWebView, 
+    passport.authenticate('jwt', {session:false}),
+    DepartmentController.getAllDepartmentWebView
 );
 
 app.delete(DeleteDepartment,
