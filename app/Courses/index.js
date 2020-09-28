@@ -6,6 +6,7 @@ const {
   FetchAllCourse,
   searchMaterials,
   SearchCourse,
+  FetchCoursesWebView
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -29,6 +30,11 @@ app.get(FetchAllCourse,
    CoursesController.getAllCourses
 )
 
+app.get(FetchCoursesWebView,
+  passport.authenticate('jwt', {session:false}),
+  roleAuthorization(['admin','user']),
+  CoursesController.getAllCoursesWebView
+)
 
 app.get(SearchCourse,
   passport.authenticate('jwt', {session:false}),

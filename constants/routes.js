@@ -11,6 +11,8 @@ module.exports = {
    FetchUserAllUser:"/users",
    FetchUserById:"/auth/:userId",
    FetchAllDepartment:"/department/",
+   FetchDepartmentWebView:"/department/view",
+   FetchCoursesWebView:"/courses/view",
    FetchLevelByDepartmentId :"/:departmentId/level/",
    FetchLevel :"/levels/",
    FetchCourseByLevel:"/:level/course/",
