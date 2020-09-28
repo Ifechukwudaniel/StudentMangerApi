@@ -6,7 +6,7 @@ const {missingParameterError } = require('../utils/error')
 const createLevel =(req, res, next)=>{
   const {
    number,
-   department
+   department,
   } = req.body
   if(!department)
     return  res.status(500).send(missingParameterError("department"))
@@ -50,7 +50,14 @@ const createLevel =(req, res, next)=>{
 
 const getAllLevel = (req, res, next)=>{
    Level.find({})
-   .then(departments=>res.json(departments))
+   .populate({path:'department', select:'name'})
+   .lean().exec()
+   .then(data=>{
+    return res.send(data.map((x=>{
+      console.log(x.timetable)
+      return {id:x._id,department: x.department.name, level: x.number, hasTimeTable:x.timeTable==null?false:true , totalCourses:x.courses.length }
+    })))
+   })
    .catch(err=> res.status(500).send({error:`Please an error occurred`}) )
 }
 

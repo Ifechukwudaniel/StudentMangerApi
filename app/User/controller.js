@@ -85,9 +85,11 @@ const getUserById = function (req, res, next) {
 const getUsers = function (req, res, next) {
     User
       .find({})
-      .select("-password")
-      .exec()
-      .then(user =>res.json(user))
+      .select("-password").populate({path:'department', select:'name'}).populate({path:'level', select:'number'})
+      .lean().exec()
+      .then(user =>res.json(user.map((data)=>{
+         return {id:data._id, role:data.role,matricNumber:data.matricNumber,name:data.name, department:data.department?data.department.name : null, level:data.level?parseInt(data.level.number): null}
+      })))
       .catch(e => {
         res.status(500).send({error:"An error occurred"})
         console.log(e)
