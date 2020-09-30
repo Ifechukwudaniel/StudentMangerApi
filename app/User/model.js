@@ -36,6 +36,9 @@ const User = new mongoose.Schema({
     type:Number,
     default:0
   },
+  deviceId:{
+    type:String,
+  }
 }, configModel.options);
 
 module.exports = mongoose.model('User', User);
