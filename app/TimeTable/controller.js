@@ -86,6 +86,7 @@ const getTimeTableByLevel=(req, res)=>{
                         select:'courseCode description  -_id',
                     }
                 },})
+                .lean()
                 .exec()
       .then(timeTable=>{
         if(timeTable)
@@ -97,5 +98,5 @@ const getTimeTableByLevel=(req, res)=>{
 
 module.exports = {
     addTimeTableByLevel,
-    getTimeTableByLevel
+    getTimeTableByLevel,
 };

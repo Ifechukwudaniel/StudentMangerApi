@@ -64,8 +64,12 @@ const getMaterialByCourseId = (req, res, next)=>{
     .catch(err=> res.status(500).send({error:`${coursesId} is not a department id`}) )
 }
 
+
 const getMaterials= (req, res, next) =>{
   Material.find()
+  .populate({path:'course',select:'courseCode _id'})
+  .lean()
+  .exec()
   .then(data=>{
       return res.send(data)
   })
