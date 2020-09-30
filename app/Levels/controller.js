@@ -42,7 +42,7 @@ const createLevel =(req, res, next)=>{
 
    })
    .catch(value=>{
-    return  res.status(500).send({error: `${department} does not exist`})
+    return  res.status(500).send({error: `department   does not exist`})
    })
 
 
@@ -55,7 +55,7 @@ const getAllLevel = (req, res, next)=>{
    .then(data=>{
     return res.send(data.map((x=>{
       console.log(x.timetable)
-      return {id:x._id,department: x.department.name, level: x.number, hasTimeTable:x.timeTable==null?false:true , totalCourses:x.courses.length }
+      return {id:x._id,department: x.department.name,departmentId: x.department._id,level: x.number, hasTimeTable:x.timeTable==null?false:true , totalCourses:x.courses.length }
     })))
    })
    .catch(err=> res.status(500).send({error:`Please an error occurred`}) )
