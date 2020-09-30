@@ -2,7 +2,8 @@ var ActivityController = require('./controller');
 const {app} = require('../../server')
 const {
   WeaklyActivity,
-  DayActivity
+  DayActivity,
+  FetchTimeTableByLevelWeb
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -21,4 +22,9 @@ app.get(WeaklyActivity,
 app.get(DayActivity,
   passport.authenticate('jwt',{session:false}),
   ActivityController.getTodayActivityByLevel
+);
+
+app.get(FetchTimeTableByLevelWeb,
+  passport.authenticate('jwt',{session:false}),
+  ActivityController.getTimeTableWeb
 );

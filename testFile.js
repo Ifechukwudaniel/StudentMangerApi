@@ -1,4 +1,7 @@
 // var gcm = require('node-gcm');
+
+const moment = require("moment");
+
  
 // // Set up the sender with your GCM/FCM API key (declare this once for multiple messages)
 // var sender = new gcm.Sender('AAAA-VyZqgQ:APA91bGkDFBFfnDcTONG59-wVOHECImMnhE0aiqeGACUPqDAdOm9jLifadQcethlX_6_hEAFiytvVHKxaAaONlJHoHTvLt_22M8PZbT_SV1HEeKcT0SPKlzmSvCJDyrxa123Ymrl5vhN');
@@ -29,15 +32,22 @@
  
 
 
-const createLevelFromNumber =(x)=>{
-   let start= 100  
-   let array = []
-   for (let index = 1; index <=x; index++) {
-     array.push(index*start)
-   }
+// const createLevelFromNumber =(x)=>{
+//    let start= 100  
+//    let array = []
+//    for (let index = 1; index <=x; index++) {
+//      array.push(index*start)
+//    }
 
-   return array
-}
+//    return array
+// }
 
 
-console.log(createLevelFromNumber(4))
+// console.log(createLevelFromNumber(4))
+
+let data = moment.weekdays()
+let xb = data.map((x)=>{
+   return moment().day(x)
+})
+
+console.log(xb)

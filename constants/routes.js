@@ -22,6 +22,7 @@ module.exports = {
    FetchAllBlogs:'/blog/',
    FetchCommentByBlogId:'/comment/:blogId',
    FetchTimeTableByLevel:"/timetable/:level",
+   FetchTimeTableByLevelWeb:"/activity/timetable/view/:level",
    DeleteDepartment:"/department/",
    DeleteById:"/auth/:userId",
    DeleteBlog:"/blog/:blogId",
