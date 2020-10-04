@@ -1,6 +1,7 @@
 const axios = require('axios')
 const  qs = require('qs');
 var HTMLParser = require('node-html-parser');
+const {imageUpload}  = require('./awsFile')
 
 const logInApi = ( matricNumber, password)=>{
     return new Promise((resolve, reject)=>{
@@ -67,11 +68,17 @@ const logInApi = ( matricNumber, password)=>{
               
               axios(config)
               .then(function (response) {
+                let urlImage = ''
                 const newData = HTMLParser.parse(response.data);
                 const fullName = newData.querySelector("#HeaderContent_lblFullName").innerHTML
                 const department = newData.querySelector("#HeaderContent_lblDepartment").innerHTML
                 const level =parseInt(newData.querySelector("#HeaderContent_lblLevel").innerHTML)
-                 resolve({ Response:"SUCCESS",image:userImg,fullName, department,level})
+                imageUpload(userImg).then(data=>{
+                  resolve({ Response:"SUCCESS",image:data,fullName, department,level})
+                })
+                .catch(()=>{
+                    reject({Response:"FAILED",Message:"Please an error occurred"})
+                })
               })
               .catch(function (error) {
                 reject({Response:"FAILED",Message:"Please an error occurred"})

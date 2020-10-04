@@ -25,38 +25,9 @@ const register = function (req, res, next, isLogin=false) {
       return res.status(500).send({error:` User with ${matricNumber} already exist` })
      }
      else{
-        const userData = logInApi(matricNumber, password)
-        .then(value=>{
-            const hashedPassword = crypto.encrypt(password);
-            const user = new User({
-              matricNumber:value.MATRIC_NO,
-              name:value.FULL_NAME,
-              password: hashedPassword,
-              role: role ? 'admin' : 'user',
-            })
-            firebase.database().ref()
-            .child('users')
-            .push({
-             matricNumber:user.matricNumber,
-             name:user.name,
-            })
-            user
-              .save()
-              .then((user) => { 
-                  return res.json({
-                    user,
-                    success: true,
-                  });
-              })
-              .catch(e => {
-                 console.log(e)
-                return res.status(500).send({error:` An error occurred` })
-              });
-       })
-       .catch(value=>{
-        return res.status(500).send(value)
-       })
-      }})
+            
+    
+    }})
 
 
 };
