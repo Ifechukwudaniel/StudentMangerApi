@@ -1,7 +1,8 @@
 module.exports= {
     admin:"admin",
-    user:'user',
-    staff:'staff',
+    student:'student',
+    manager:'manager',
+    teacher:'teacher',
     StudyMaterial:"Study Material",
     PastQuestions:"Past Questions",
     

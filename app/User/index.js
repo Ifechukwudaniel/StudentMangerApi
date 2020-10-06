@@ -6,7 +6,8 @@ const {
   FetchUserById,
   FetchUserAllUser,
   Login,
-  VerifyToken
+  VerifyToken,
+  FetchUserByLevel
 } = require("../../constants/routes")
 const {
   app
@@ -43,6 +44,14 @@ app.get(FetchUserAllUser,
   }),
   roleAuthorization(['admin']),
   UserController.getUsers
+)
+
+app.get(FetchUserByLevel,
+  passport.authenticate('jwt', {
+    session: false
+  }),
+  roleAuthorization(['admin']),
+  UserController.getUsersByLevel
 )
 
 app.post(Login, UserController.login(passport))

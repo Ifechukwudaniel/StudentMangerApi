@@ -94,12 +94,12 @@ getAllCourses = (req, res, next )=>{
 
 getAllCoursesWebView = (req, res, next )=>{
   Course.find({})
-  .populate('level', 'number -_id')
+  .populate('level', 'number ')
   .populate('department', "name ")
   .lean().exec()
   .then(data=>{
     return res.send(data.map((data)=>{
-       return {id:data.id,courseCode:data.courseCode,totalMaterial:data.material.length,level:data.level.number,department:data.department.name}
+       return {id:data._id,courseCode:data.courseCode,totalMaterial:data.material.length,level:data.level.number,department:data.department.name, departmentId:data.department._id, levelId:data.level._id}
     }))
   })
 }

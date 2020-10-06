@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken');
 const {missingParameterError} = require("../utils/error")
 const config = require('../../config')
 const firebase = require('../../firebase')
+const Department = require('./../Departments/model')
+const Level = require('./../Levels/model')
+const _ = require('lodash')
+const {user, admin, staff} = require('../../constants/SchemaEnum')
 
 const register = function (req, res, next, isLogin=false) {
   const {
@@ -19,17 +23,45 @@ const register = function (req, res, next, isLogin=false) {
   if(!password) 
     return res.status(500).send(missingParameterError(" Missing password"))
   
-  User.findOne({matricNumber:matricNumber.toUpperCase().trim()})
+  User.findOne({matricNumber:{ $regex: new RegExp("^" + matricNumber.toLowerCase(), "i") }})
   .then((value)=>{
      if(value){
-      return res.status(500).send({error:` User with ${matricNumber} already exist` })
+         return res.status(500).send({error:` User with ${matricNumber} already exist` })
      }
      else{
-            
-    
+         logInApi(matricNumber, password)
+         .then(data=>{
+            const {image, fullName, department, level } = data;
+            Department.findOne({name: { $regex: new RegExp("^" + department.toLowerCase(), "i") }}).populate({path:'levels', select:'number '})
+            .then((data)=>{
+              let userLevel = _.find(data.levels, {number:level })
+              if (!userLevel) {
+                return res.status(500).send({error:" Your level has not being added to our database "})
+              } else {
+                console.log(data)
+                let newUser =    new User({
+                    image,
+                    department:data._id,
+                    level:userLevel._id,
+                    name:fullName,
+                    password,
+                    matricNumber:matricNumber.toUpperCase(),
+                    role:user
+                  })
+                newUser.save()
+                .then(()=>{
+                  return res.send({message:'Successfully Signup'})
+                })
+              }
+            })
+            .catch((err)=>{
+              return res.status(500).send({error:" Your department has not being added to our database "})
+            })
+         })
+         .catch(err=>{
+           return res.status(500).send({error:err.Message})
+         })
     }})
-
-
 };
 
 const getUserById = function (req, res, next) {
@@ -59,12 +91,26 @@ const getUsers = function (req, res, next) {
       .select("-password").populate({path:'department', select:'name'}).populate({path:'level', select:'number'})
       .lean().exec()
       .then(user =>res.json(user.map((data)=>{
-         return {id:data._id, role:data.role,matricNumber:data.matricNumber,name:data.name, department:data.department?data.department.name : null, level:data.level?parseInt(data.level.number): null}
+         return {image: data.image, id:data._id, role:data.role,matricNumber:data.matricNumber,name:data.name, department:data.department?data.department.name : null, level:data.level?parseInt(data.level.number): null}
       })))
       .catch(e => {
         res.status(500).send({error:"An error occurred"})
         console.log(e)
       });
+};
+
+const getUsersByLevel = function (req, res, next) {
+   const {level} = req.params;
+    User.find({level})
+    .select("-password").populate({path:'department', select:'name'}).populate({path:'level', select:'number'})
+    .lean().exec()
+    .then(user =>res.json(user.map((data)=>{
+       return {image: data.image, id:data._id, role:data.role,matricNumber:data.matricNumber,name:data.name, department:data.department?data.department.name : null, level:data.level?parseInt(data.level.number): null, present:false}
+    })))
+    .catch(e => {
+      res.status(500).send({error:"An error occurred"})
+      console.log(e)
+    });
 };
 
 /* Delete a user */
@@ -147,5 +193,6 @@ module.exports = {
   deleteUserById,
   login,
   getUserById,
-  verifyToken
+  verifyToken,
+  getUsersByLevel
 };

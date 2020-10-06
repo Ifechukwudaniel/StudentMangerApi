@@ -12,7 +12,6 @@ const User = new mongoose.Schema({
     type: String,
   },
   matricNumber: {
-    required: true,
     type: String,
   },
    level: {

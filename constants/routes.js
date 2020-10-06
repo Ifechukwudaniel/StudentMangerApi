@@ -9,6 +9,7 @@ module.exports = {
    CreateComment:"/comment/",
    CreateTimeTableByLevel:"/timetable/",
    FetchUserAllUser:"/users",
+   FetchUserByLevel:"/users/:level",
    FetchUserById:"/auth/:userId",
    FetchAllDepartment:"/department/",
    FetchDepartmentWebView:"/department/view",

@@ -20,24 +20,24 @@ app.post(CreateCourse,
 
 app.get(FetchCourseByLevel, 
   passport.authenticate('jwt', {session:false}),
-  roleAuthorization(['admin', 'user']),
+  roleAuthorization(['admin', 'student']),
   CoursesController.getAllCourseByLevel
 )
 
 app.get(FetchAllCourse,
   passport.authenticate('jwt', {session:false}),
-  roleAuthorization(['admin','user']),
+  roleAuthorization(['admin','student']),
    CoursesController.getAllCourses
 )
 
 app.get(FetchCoursesWebView,
   passport.authenticate('jwt', {session:false}),
-  roleAuthorization(['admin','user']),
+  roleAuthorization(['admin','student']),
   CoursesController.getAllCoursesWebView
 )
 
 app.get(SearchCourse,
   passport.authenticate('jwt', {session:false}),
-  roleAuthorization(['admin','user']),
+  roleAuthorization(['admin','student']),
    CoursesController.searchCourse
 )

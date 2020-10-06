@@ -26,8 +26,12 @@ var User = require('./app/User/model');
 var crypto = require('./app/utils/crypto');
 const port = process.env.PORT || 3000;
 const cors = require('cors')
+const expressWs = require('express-ws')
 
 const app = express();
+
+expressWs(app)
+
 app.use(cors())
 
 mongoose.connect(config.db, {useNewUrlParser:true, useUnifiedTopology:true});
@@ -58,6 +62,29 @@ require('./app/TimeTable')
 require('./app/Attendance')
 require('./app/Activity')
 
+const wsHandler = (ws) => {
+  // Add the connection to our set
+  connections.add(ws)
+
+  // We define the handler to be called everytime this
+  // connection receives a new message from the client
+  ws.on('message', (message) => {
+    // Once we receive a message, we send it to all clients
+    // in the connection set
+    connections.forEach((conn) => conn.send(message))
+  })
+
+  // Once the client disconnects, the `close` handler is called
+  ws.on('close', () => {
+    // The closed connection is removed from the set
+    connections.delete(ws)
+  })
+}
+
+
+app.ws('/chat', wsHandler)
+
+
 connection
    .on('error', console.error.bind(console, 'connection error:'))
   .once('open', ()=>{
@@ -71,4 +98,3 @@ app.use(function (req, res, next) {
       success: false,
     }); 
 });
-
