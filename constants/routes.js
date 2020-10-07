@@ -33,6 +33,7 @@ module.exports = {
    FetchAllCourse:'/courses/',
    CreateBlog:'/blog/',
    CreateAttendance:'/attendance/',
+   CreateAttendanceBulk:'/attendance/bulk',
    FetchAttendance:'/attendance/',
    FetchAttendanceByCourse:'/attendance/:course',
    searchMaterials:"/search/material/:searchQuery",

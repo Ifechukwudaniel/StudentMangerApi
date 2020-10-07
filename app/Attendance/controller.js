@@ -8,10 +8,10 @@ const addAttendance= (req, res )=>{
    const {course, present, matricNumber, timeStart, timeEnd} = req.body
    if(!matricNumber)return res.status(500).send(missingParameterError("Matric Number"))
    if(!course)return res.status(500).send(missingParameterError("Course "))
-   if(!timeStart)return res.status(500).send(missingParameterError("Course "))
-   if(!timeEnd)return res.status(500).send(missingParameterError("Course "))
+   if(!timeStart)return res.status(500).send(missingParameterError("TimeStart"))
+   if(!timeEnd)return res.status(500).send(missingParameterError("TimeEnd"))
     
-   User.findOne({matricNumber:matricNumber.toUpperCase().trim()})
+   User.findOne({matricNumber:{$regex: new RegExp("^" + matricNumber.toLowerCase(), "i") }})
    .then(user=>{
       if(!user)  return res.status(500).send({error:`user with matric number ${matricNumber} not found`})
        Course.findById(course)
@@ -27,7 +27,7 @@ const addAttendance= (req, res )=>{
        })
    })
    .catch(err=>{
-     console.log(err)
+    return res.status(500).send({error:`Please an error ocurred`})
    })
 }
 
@@ -69,10 +69,23 @@ const getAttendance= (req, res )=>{
    })
  }
 
- 
+ const saveAttendanceBulk= ( req, res )=>{
+    const { attendance} = req.body
+    if(!attendance)return res.status(500).send(missingParameterError("attendance"))
+    Attendance.insertMany(attendance)
+    .then(data=>{
+       return res.send({message:'Saved users attendance'})
+    })
+    .catch(err=>{
+      return res.status(500).send({error:'Please an error occurred'})
+    })
+ }
+
+
 
 module.exports = {
    addAttendance,
    getAttendance,
-   getUserAttendanceByCourse
+   getUserAttendanceByCourse,
+   saveAttendanceBulk
 };
