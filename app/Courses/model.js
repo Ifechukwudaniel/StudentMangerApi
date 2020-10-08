@@ -28,6 +28,11 @@ const Courses = new mongoose.Schema({
     type:String,
     required:true
   }, 
+  image:{
+    type:String,
+    required:true,
+    default:'"https://cdn.pixabay.com/photo/2020/10/04/04/24/cat-5625168_1280.jpg'
+  }, 
    material:[{
     type: ObjectId,
     ref:"Materials"  

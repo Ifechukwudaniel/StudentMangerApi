@@ -3,7 +3,9 @@ const {app} = require('../../server')
 const {
   CreateAttendance,
   FetchAttendance,
-  CreateAttendanceBulk
+  CreateAttendanceBulk,
+  FetchAttendanceByMatricNumber
+  
 } = require("../../constants/routes")
 const passport = require('passport')
 const {roleAuthorization} = require('../utils/roleAuthorization')
@@ -25,3 +27,9 @@ app.post(CreateAttendanceBulk,
   roleAuthorization(['admin']),
   AttendanceController.saveAttendanceBulk
 )
+
+app.post(FetchAttendanceByMatricNumber, 
+  passport.authenticate('jwt',{session:false}) ,
+  roleAuthorization(['admin']),
+  AttendanceController.getUserAttendanceByMatricNumber
+ )
