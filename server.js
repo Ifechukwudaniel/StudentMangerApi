@@ -27,6 +27,7 @@ var crypto = require('./app/utils/crypto');
 const port = process.env.PORT || 3000;
 const cors = require('cors')
 const expressWs = require('express-ws')
+const clearCache   = require('./services/cache')
 
 const app = express();
 
