@@ -36,6 +36,7 @@ module.exports = {
    CreateAttendanceBulk:'/attendance/bulk',
    FetchAttendance:'/attendance/',
    FetchAttendanceByCourse:'/attendance/:course',
+   FetchAttendanceByMatricNumber:'/attendance/matric',
    searchMaterials:"/search/material/:searchQuery",
    filterMaterial:"/filter/material/:query",
    LikeBlogPost:'/blog/like/:blog',
