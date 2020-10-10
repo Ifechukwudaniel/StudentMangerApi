@@ -44,7 +44,7 @@ const register = function (req, res, next, isLogin=false) {
                     department:data._id,
                     level:userLevel._id,
                     name:fullName,
-                    password,
+                    password:crypto.encrypt(password),
                     matricNumber:matricNumber.toUpperCase(),
                     role:user
                   })
