@@ -135,7 +135,7 @@ const login = function (passport) {
   return function (req, res, next) {
         passport.authenticate('local', { session: false }, (err, user, info) => {
           if (err || !user) {
-             console.log(user);
+             console.log(err,info);
             return res.status(400).json({
               error: 'User Id or Password is wrong',
             });
@@ -144,12 +144,31 @@ const login = function (passport) {
             if (err) {
               next(err);
             }
+            user= user._doc
             // Provide data since user is not a proper serialized object
-            const token = jwt.sign(user.toObject(), config.SECRET);
-            return res.json({
-              success: true,
-              token,
-            });
+            let userData = {...user}
+            Department.findById(user.department).
+            then(data=>{
+                 userData=({...user, department:data.name})
+                Level.findById(user.level).
+                  then(data=>{
+                    userData.level=data.number
+                    const token = jwt.sign(userData, config.SECRET);
+                    return res.json({
+                      success: true,
+                      token,
+                    });
+                    
+                })
+             .catch(err=>{
+               userData.level = ""
+               console.log(err)
+             })
+            })
+            .catch(err=>{
+              userData.department = ""
+              console.log(err)
+            })
           });
         })(req, res);
       }
