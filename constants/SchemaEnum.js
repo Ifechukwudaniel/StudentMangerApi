@@ -5,5 +5,6 @@ module.exports= {
     teacher:'teacher',
     StudyMaterial:"Study Material",
     PastQuestions:"Past Questions",
+    user:'User'
     
-}
+}``
