@@ -7,4 +7,4 @@ module.exports= {
     PastQuestions:"Past Questions",
     user:'User'
     
-}``
+}
