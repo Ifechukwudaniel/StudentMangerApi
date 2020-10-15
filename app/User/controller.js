@@ -206,6 +206,10 @@ function confirmToken(token) {
 }
 
 
+const changePassword= function (req,res, next) {
+    console.log(req.user)
+}
+
 module.exports = {
   register,
   getUsers,
@@ -213,5 +217,6 @@ module.exports = {
   login,
   getUserById,
   verifyToken,
-  getUsersByLevel
+  getUsersByLevel,
+  changePassword
 };
