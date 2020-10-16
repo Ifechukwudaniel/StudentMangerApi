@@ -207,7 +207,33 @@ function confirmToken(token) {
 
 
 const changePassword= function (req,res, next) {
-    console.log(req.user)
+  const {
+    currentPassword,
+    newPassword,
+    confirmPassword,
+  } = req.body;
+  if(!currentPassword) 
+  return res.status(500).send(missingParameterError("Please enter your current password"))
+  if(!newPassword) 
+  return res.status(500).send(missingParameterError(" Please enter your new password"))
+  if(!confirmPassword) 
+  return res.status(500).send(missingParameterError("Please confirm your  password"))
+
+  if(newPassword!== confirmPassword) 
+  return res.status(500).send({error:' confirm password did not match '})
+  
+  User.findById(req.user.id)
+  .then((user)=>{
+       user.password= crypto.encrypt(newPassword)
+       user.save()
+       .then(()=>{
+          res.send({message:'Change Password SuccessFully '})
+       })
+  })
+  .catch(()=>{
+    return res.status(500).send({error:"Please this user does not exist"})
+  })
+
 }
 
 module.exports = {

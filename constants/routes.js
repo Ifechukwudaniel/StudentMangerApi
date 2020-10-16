@@ -42,5 +42,6 @@ module.exports = {
    LikeBlogPost:'/blog/like/:blog',
    DisLikeBlogPost:'/blog/dislike/:blog',
    WeaklyActivity:'/activity/week/:level',
-   DayActivity:'/activity/day/:level'
+   DayActivity:'/activity/day/:level',
+   ChangePassword :"/auth/changePassword"
 }

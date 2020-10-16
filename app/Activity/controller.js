@@ -48,10 +48,12 @@ const getThisWeekActivityByLevel=(req, res, next)=>{
       if(!level.timeTable){
         return res.status(500).send({error:'Could not find a time table for this level'})
       }
+       
        DayActionModel.find({level})
        .populate({path:"course", select:'courseCode'})
        .lean().exec()
        .then((data)=>{
+        console.log(data)
         let dateDate = []
         let mon=  _.filter(data, {weekDay:1}) ,tue=  _.filter(data, {weekDay:2}) ,wen=  _.filter(data, {weekDay:3}), thu=  _.filter(data, {weekDay:4}),fri=  _.filter(data, {weekDay:5})
         mon.sort((a,b)=>(convertTime12to24(a.startTime) - convertTime12to24(b.startTime)))

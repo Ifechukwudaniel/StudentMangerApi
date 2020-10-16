@@ -7,7 +7,8 @@ const {
   FetchUserAllUser,
   Login,
   VerifyToken,
-  FetchUserByLevel
+  FetchUserByLevel,
+  ChangePassword
 } = require("../../constants/routes")
 const {
   app
@@ -20,6 +21,14 @@ const {
 
 app.post(CreateUser,
   UserController.register
+);
+
+
+app.post(ChangePassword,
+  passport.authenticate('jwt', {
+    session: false
+  }),
+  UserController.changePassword
 );
 
 app.delete(DeleteById,

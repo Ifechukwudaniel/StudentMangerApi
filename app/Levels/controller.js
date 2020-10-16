@@ -54,11 +54,14 @@ const getAllLevel = (req, res, next)=>{
    .lean().exec()
    .then(data=>{
     return res.send(data.map((x=>{
-      console.log(x.timetable)
-      return {id:x._id,department: x.department.name,departmentId: x.department._id,level: x.number, hasTimeTable:x.timeTable==null?false:true , totalCourses:x.courses.length }
+      console.log(x)
+      return {id:x._id,department: x.department.name ===null ? "" : x.department.name,departmentId: x.department._id,level: x.number, hasTimeTable:x.timeTable==null?false:true , totalCourses:x.courses.length }
     })))
    })
-   .catch(err=> res.status(500).send({error:`Please an error occurred`}) )
+   .catch(err=> {
+     console.log(err)
+     res.status(500).send({error:`Please an error occurred`})
+    } )
 }
 
 const getLevelByDepartmentId = (req, res, next)=>{
@@ -71,7 +74,9 @@ const getLevelByDepartmentId = (req, res, next)=>{
     .then(data=>{
      return res.send(data.levels)
     })
-    .catch(err=> res.status(500).send({error:`${departmentId} is not a department id`}) )
+    .catch(err=> {
+      res.status(500).send({error:`${departmentId} is not a department id`})
+     } )
 }
 
 

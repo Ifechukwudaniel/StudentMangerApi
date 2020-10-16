@@ -11,7 +11,6 @@ const addTimeTableByLevel= (req, res )=>{
   const {level, days} = req.body 
   if(!level) return res.status(500).send(missingParameterError('Level'))
   if(!days) return res.status(500).send(missingParameterError('Days'))
-
   Level.findById(level)
   .populate({path:'department', select:"name"})
   .then((async level=>{  
@@ -22,8 +21,9 @@ const addTimeTableByLevel= (req, res )=>{
          await Level.findByIdAndUpdate(level.id,{timeTable:timeTable._id})
          .then(()=>{
               days.map(async (day)=>{
+                 console.log(day)
                 await  Day.create({
-                  weekDay:day.weakDay,
+                  weekDay:day.weekDay,
                   timeTable:timeTable._id
                 }).then( async currentDay=>{
                     await  TimeTable.findByIdAndUpdate(timeTable._id, { $push:{days:currentDay._id} })

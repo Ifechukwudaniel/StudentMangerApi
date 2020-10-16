@@ -32,7 +32,7 @@ app.get(FetchAllCourse,
 
 app.get(FetchCoursesWebView,
   passport.authenticate('jwt', {session:false}),
-  roleAuthorization(['admin','student']),
+  // roleAuthorization(['admin','student']),
   CoursesController.getAllCoursesWebView
 )
 

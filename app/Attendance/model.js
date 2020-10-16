@@ -9,7 +9,8 @@ const Attendance = new mongoose.Schema({
   },
    course:{
     type: ObjectId,
-    ref:"Courses" 
+    ref:"Courses" ,
+    required:true
    },
    user:{
     type: ObjectId,

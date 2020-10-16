@@ -30,6 +30,6 @@ app.post(CreateAttendanceBulk,
 
 app.post(FetchAttendanceByMatricNumber, 
   passport.authenticate('jwt',{session:false}) ,
-  roleAuthorization(['admin']),
+  // roleAuthorization(['admin']),
   AttendanceController.getUserAttendanceByMatricNumber
  )
