@@ -4,8 +4,8 @@ const imageUpload = async (base64) => {
   const uuid = require('uuid').v4
 
   const { ACCESS_KEY_ID, SECRET_ACCESS_KEY, AWS_REGION, S3_BUCKET } = {
-    ACCESS_KEY_ID:"AKIAIKDALHTFGQUDYU5Q",
-    SECRET_ACCESS_KEY:"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",
+    ACCESS_KEY_ID:"AKIAY7SN6HWXSJZBWBWS",
+    SECRET_ACCESS_KEY:"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",
     AWS_REGION:"us-east-2",
     S3_BUCKET:"test323hxshs",
   };
