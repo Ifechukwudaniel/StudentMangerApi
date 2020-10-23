@@ -32,7 +32,7 @@ passport.use(new LocalStrategy({
       
       if (err) return done(err);
       if (!user || crypto.decrypt(user.password) !== password) {
-        return done(null, false, { message: 'Credential Error' });
+        return done(null, false, { message: 'invalid password' });
       }
       return done(null, user);
     });
