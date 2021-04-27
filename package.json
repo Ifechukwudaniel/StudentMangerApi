@@ -50,7 +50,7 @@
     "puppeteer": "^2.0.0",
     "react-native-scroll-month-calender": "^0.0.11",
     "react-toastify-redux": "^1.0.0-rc.2",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "uuid": "^8.3.1",
     "view-helpers": "~0.1.5",
     "winston": "~2.3.0",
