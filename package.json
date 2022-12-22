@@ -32,7 +32,7 @@
     "forever": "~0.15.1",
     "fuse.js": "^5.1.0",
     "jade": "~1.11.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.20",
     "material-ui-confirm": "^2.1.1",
     "method-override": "~2.3.5",
